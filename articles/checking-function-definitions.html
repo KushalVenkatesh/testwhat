@@ -110,33 +110,33 @@
 
     
     
-<p>Many exercise require a student to hand-craft a function to make their code more dry. With <code><a href="../reference/test_fun_def.html">check_fun_def()</a></code> and a range of related helper <code>check_</code> functions you can effectively check the correctness of these user-defined functions.</p>
+<p>Many exercise require a student to hand-craft a function to make their code more dry. With <code>check_fun_def()</code> and a range of related helper <code>check_</code> functions you can effectively check the correctness of these user-defined functions.</p>
 <p>As an example, have a look at the following solution:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Define my_fun</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">my_fun &lt;-<span class="st"> </span><span class="cf">function</span>(a, b) {</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="kw">abs</span>(a) <span class="op">+</span><span class="st"> </span><span class="kw">abs</span>(b)</a>
 <a class="sourceLine" id="cb1-4" data-line-number="4">}</a></code></pre></div>
 <p>The following SCT checks the function definition and whether the function was properly called:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/test_fun_def.html">check_fun_def</a></span>(<span class="st">"my_fun"</span>) <span class="op">%&gt;%</span><span class="st"> </span>{</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw"><a href="../reference/test_fun_def.html">check_arguments</a></span>(.)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="kw"><a href="../reference/test_fun_def.html">check_call</a></span>(., <span class="dv">1</span>, <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/s3defs.html">check_result</a></span>()</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="kw"><a href="../reference/test_fun_def.html">check_call</a></span>(., <span class="dv">-1</span>, <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/s3defs.html">check_result</a></span>()</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="kw"><a href="../reference/test_fun_def.html">check_call</a></span>(., <span class="dv">1</span>, <span class="dv">-2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/s3defs.html">check_result</a></span>()</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="kw"><a href="../reference/test_fun_def.html">check_call</a></span>(., <span class="dv">-1</span>, <span class="dv">-2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/s3defs.html">check_result</a></span>()</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="kw"><a href="../reference/s3defs.html">check_body</a></span>(.) <span class="op">%&gt;%</span><span class="st"> </span>{</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">    <span class="kw"><a href="../reference/check_function.html">check_function</a></span>(., <span class="st">"abs"</span>, <span class="dt">index =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">    <span class="kw"><a href="../reference/check_function.html">check_function</a></span>(., <span class="st">"abs"</span>, <span class="dt">index =</span> <span class="dv">2</span>)</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_fun_def</span>(<span class="st">"my_fun"</span>) <span class="op">%&gt;%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">check_arguments</span>(.)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="kw">check_call</span>(., <span class="dv">1</span>, <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_result</span>()</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="kw">check_call</span>(., <span class="dv">-1</span>, <span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_result</span>()</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="kw">check_call</span>(., <span class="dv">1</span>, <span class="dv">-2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_result</span>()</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="kw">check_call</span>(., <span class="dv">-1</span>, <span class="dv">-2</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_result</span>()</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="kw">check_body</span>(.) <span class="op">%&gt;%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">    <span class="kw">check_function</span>(., <span class="st">"abs"</span>, <span class="dt">index =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">    <span class="kw">check_function</span>(., <span class="st">"abs"</span>, <span class="dt">index =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb2-10" data-line-number="10">  }</a>
 <a class="sourceLine" id="cb2-11" data-line-number="11">}</a></code></pre></div>
 <ul>
 <li>
 <code>check_fun_def</code> checks whether <code>my_fun</code> was defined by the student. If this is the case, it will produce a substate that contains a reference to the function arguments and its body.</li>
 <li>
-<code><a href="../reference/test_fun_def.html">check_arguments()</a></code> checks whether the arguments correspond to the function definition in the solution.</li>
+<code>check_arguments()</code> checks whether the arguments correspond to the function definition in the solution.</li>
 <li>
-<code><a href="../reference/test_fun_def.html">check_call()</a></code> will call the function <code>my_fun()</code> as <code>my_fun(1,2)</code> inside the student process and check whether it gives the same result as calling <code>my_fun(1, 2)</code> in the solution process. This is a robust way of checking the function definition, as it makes abstraction of function arguments and underlying implementation of the function. It does the same for some other calls of <code>my_fun()</code>.</li>
+<code>check_call()</code> will call the function <code>my_fun()</code> as <code>my_fun(1,2)</code> inside the student process and check whether it gives the same result as calling <code>my_fun(1, 2)</code> in the solution process. This is a robust way of checking the function definition, as it makes abstraction of function arguments and underlying implementation of the function. It does the same for some other calls of <code>my_fun()</code>.</li>
 <li>
-<code><a href="../reference/s3defs.html">check_body()</a></code> executes tests in the substate of the body of the function definition (as if the body of the function was the only code in the student submission). If, for example, the student used <code>abs()</code> outside the function definition, this would be ignored. Notice here that no arguments are specified. If we did this, <code>test_function()</code> would compare the actual values of the arguments. This is information that is not available, as <code>a</code> and <code>b</code> are not variables that are available in the workspace, only in the scope of the function. If all of the calls in <code>body_test</code> pass, the tests in <code>function_test</code> are executed again, this time not silently, and thus able to generate feedback messages.</li>
+<code>check_body()</code> executes tests in the substate of the body of the function definition (as if the body of the function was the only code in the student submission). If, for example, the student used <code>abs()</code> outside the function definition, this would be ignored. Notice here that no arguments are specified. If we did this, <code>test_function()</code> would compare the actual values of the arguments. This is information that is not available, as <code>a</code> and <code>b</code> are not variables that are available in the workspace, only in the scope of the function. If all of the calls in <code>body_test</code> pass, the tests in <code>function_test</code> are executed again, this time not silently, and thus able to generate feedback messages.</li>
 </ul>
 </div>
 

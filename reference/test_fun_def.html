@@ -147,7 +147,7 @@
 <span class='fu'>check_arguments</span>(<span class='no'>state</span>, <span class='kw'>incorrect_number_arguments_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for FunDefState</span>
-<span class='fu'><a href='s3defs.html'>check_body</a></span>(<span class='no'>state</span>, <span class='kw'>not_found_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='fu'>check_body</span>(<span class='no'>state</span>, <span class='kw'>not_found_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>)
 
 <span class='fu'>check_call</span>(<span class='no'>state</span>, <span class='no'>...</span>)</pre>
@@ -204,9 +204,9 @@ found.</p></td>
 <span class='co'># SCT</span>
 <span class='no'>fundef</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_fun_def</span>(<span class='st'>"my_fun"</span>)
 <span class='no'>fundef</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_arguments</span>()
-<span class='no'>fundef</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_call</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_result</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>()
-<span class='no'>fundef</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_call</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='st'>'c'</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>3</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='check_error.html'>check_error</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>()
-<span class='no'>fundef</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_body</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='check_code.html'>check_code</a></span>(<span class='st'>"+"</span>)
+<span class='no'>fundef</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_call</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_result</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
+<span class='no'>fundef</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_call</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='st'>'c'</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>3</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_error</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
+<span class='no'>fundef</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_body</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_code</span>(<span class='st'>"+"</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>

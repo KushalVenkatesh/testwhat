@@ -142,19 +142,19 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for OperationState</span>
-<span class='fu'><a href='s3defs.html'>check_result</a></span>(<span class='no'>state</span>, <span class='kw'>error_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>check_result</span>(<span class='no'>state</span>, <span class='kw'>error_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for FunctionState</span>
-<span class='fu'><a href='s3defs.html'>check_result</a></span>(<span class='no'>state</span>, <span class='kw'>error_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='fu'>check_result</span>(<span class='no'>state</span>, <span class='kw'>error_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>)
 
 <span class='co'># S3 method for FunctionResultState</span>
-<span class='fu'><a href='s3defs.html'>check_equal</a></span>(<span class='no'>state</span>, <span class='kw'>eq_condition</span> <span class='kw'>=</span> <span class='st'>"equivalent"</span>,
+<span class='fu'>check_equal</span>(<span class='no'>state</span>, <span class='kw'>eq_condition</span> <span class='kw'>=</span> <span class='st'>"equivalent"</span>,
   <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for OperationResultState</span>
-<span class='fu'><a href='s3defs.html'>check_equal</a></span>(<span class='no'>state</span>, <span class='kw'>eq_condition</span> <span class='kw'>=</span> <span class='st'>"equivalent"</span>,
+<span class='fu'>check_equal</span>(<span class='no'>state</span>, <span class='kw'>eq_condition</span> <span class='kw'>=</span> <span class='st'>"equivalent"</span>,
   <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -193,7 +193,7 @@
 <span class='fu'>mean</span>(<span class='fl'>1</span>:<span class='fl'>3</span>)
 
 <span class='co'># SCT</span>
-<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='check_function.html'>check_function</a></span>(<span class='st'>"mean"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_result</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>()
+<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_function</span>(<span class='st'>"mean"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_result</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

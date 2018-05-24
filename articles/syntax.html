@@ -140,9 +140,9 @@ if_state &lt;- ex() %&gt;% check_if_else() %&gt;% {
 ```</code></pre>
 <ul>
 <li>
-<code><a href="../reference/check_control.html">check_if_else()</a></code> will check whether an <code>if</code> statement was coded, and will afterwards ‘zoom in’ on the if statement only.</li>
-<li>Chain A: <code><a href="../reference/check_control.html">check_cond()</a></code> will consequently zoom in on the condition part of the <code>if</code> statement, so <code><a href="../reference/check_code.html">check_code()</a></code> will only look inside this fragment of the student submission.</li>
-<li>Chain B: Similarly, <code><a href="../reference/check_control.html">check_if()</a></code> starts from the <code>if</code> statement, and zooms in on the body of the <code>if</code> statement, after which <code><a href="../reference/check_function.html">check_function()</a></code> will only look for the <code>print</code> call inside this fragment of the student submission.</li>
+<code>check_if_else()</code> will check whether an <code>if</code> statement was coded, and will afterwards ‘zoom in’ on the if statement only.</li>
+<li>Chain A: <code>check_cond()</code> will consequently zoom in on the condition part of the <code>if</code> statement, so <code>check_code()</code> will only look inside this fragment of the student submission.</li>
+<li>Chain B: Similarly, <code>check_if()</code> starts from the <code>if</code> statement, and zooms in on the body of the <code>if</code> statement, after which <code>check_function()</code> will only look for the <code>print</code> call inside this fragment of the student submission.</li>
 </ul>
 <p>To further explain this example, assume the following student submission:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">4</span></a>
@@ -152,7 +152,7 @@ if_state &lt;- ex() %&gt;% check_if_else() %&gt;% {
 <p>In chain A, this is what happens:</p>
 <ul>
 <li>
-<p><code><a href="../reference/check_control.html">check_if_else()</a></code> considers the entire submission (as contained in <code>ex()</code>), and produces a child state that contains the <code>if</code> statements in student and solution:</p>
+<p><code>check_if_else()</code> considers the entire submission (as contained in <code>ex()</code>), and produces a child state that contains the <code>if</code> statements in student and solution:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># solution</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="kw">print</span>(<span class="st">"x is positive"</span>)</a>
@@ -164,14 +164,14 @@ if_state &lt;- ex() %&gt;% check_if_else() %&gt;% {
 <a class="sourceLine" id="cb3-9" data-line-number="9">}</a></code></pre></div>
 </li>
 <li>
-<p><code><a href="../reference/check_control.html">check_cond()</a></code> considers the state above produced by <code><a href="../reference/check_control.html">check_if_else()</a></code>, and produces a child state with only the condition parts of the <code>if</code> statements:</p>
+<p><code>check_cond()</code> considers the state above produced by <code>check_if_else()</code>, and produces a child state with only the condition parts of the <code>if</code> statements:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># solution</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># student</span></a>
 <a class="sourceLine" id="cb4-5" data-line-number="5">x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span></a></code></pre></div>
 </li>
-<li><p><code><a href="../reference/check_code.html">check_code()</a></code> considers the state above produced by <code><a href="../reference/check_control.html">check_cond()</a></code>, and tries to match the regexes to <code>x &lt; 0</code> student snippet. None of the regexes match, so the test fails.</p></li>
+<li><p><code>check_code()</code> considers the state above produced by <code>check_cond()</code>, and tries to match the regexes to <code>x &lt; 0</code> student snippet. None of the regexes match, so the test fails.</p></li>
 </ul>
 <p>Assume now that the student corrects the mistake, and submits the following (which is still not correct):</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">4</span></a>
@@ -181,7 +181,7 @@ if_state &lt;- ex() %&gt;% check_if_else() %&gt;% {
 <p>Chain A will go through the same steps and will pass this time as <code>x &gt; 0</code> in the student submission now matches one of the regexes. In Chain B, this is what happens:</p>
 <ul>
 <li>
-<p><code><a href="../reference/check_control.html">check_if()</a></code> considers the state produced by <code><a href="../reference/check_control.html">check_if_else()</a></code>, and produces a child state with only the body parts of the <code>if</code> statements:</p>
+<p><code>check_if()</code> considers the state produced by <code>check_if_else()</code>, and produces a child state with only the body parts of the <code>if</code> statements:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># solution</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">print</span>(<span class="st">"x is positive"</span>)</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"></a>
@@ -189,7 +189,7 @@ if_state &lt;- ex() %&gt;% check_if_else() %&gt;% {
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw">print</span>(<span class="st">"x is negative"</span>)</a></code></pre></div>
 </li>
 <li>
-<p><code><a href="../reference/check_function.html">check_function()</a></code> considers the state above produced by <code><a href="../reference/check_control.html">check_if()</a></code>, and tries to find the function <code>print()</code>. Next, it produces a state with references to the different arguments that were specified and their values:</p>
+<p><code>check_function()</code> considers the state above produced by <code>check_if()</code>, and tries to find the function <code>print()</code>. Next, it produces a state with references to the different arguments that were specified and their values:</p>
 <pre><code># solution
 { "x": "x is positive" }
 
@@ -197,14 +197,14 @@ if_state &lt;- ex() %&gt;% check_if_else() %&gt;% {
 { "x": "x is negative" }</code></pre>
 </li>
 <li>
-<p><code><a href="../reference/check_function.html">check_arg()</a></code> checks if the argument <code>x</code> is specified, and produces a child state that zooms in on the actual value of <code>x</code>:</p>
+<p><code>check_arg()</code> checks if the argument <code>x</code> is specified, and produces a child state that zooms in on the actual value of <code>x</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># solution</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">"x is positive"</span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># student</span></a>
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">"x is negative"</span></a></code></pre></div>
 </li>
-<li><p>Finally, <code><a href="../reference/s3defs.html">check_equal()</a></code> compares the equality of the two ‘focused’ arguments. They are not equal, so the check fails.</p></li>
+<li><p>Finally, <code>check_equal()</code> compares the equality of the two ‘focused’ arguments. They are not equal, so the check fails.</p></li>
 </ul>
 </div>
   </div>

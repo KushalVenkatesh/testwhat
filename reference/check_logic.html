@@ -203,9 +203,9 @@ multiple solutions to a challenge.</p>
 
 <span class='co'># Example SCT</span>
 <span class='fu'>check_correct</span>({
-  <span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='test_object.html'>check_object</a></span>(<span class='st'>"x"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>()
+  <span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_object</span>(<span class='st'>"x"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
 }, {
-  <span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_fun</span>(<span class='st'>"mean"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='check_function.html'>check_arg</a></span>(<span class='st'>"x"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>()
+  <span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_fun</span>(<span class='st'>"mean"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_arg</span>(<span class='st'>"x"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
 })
 
 <span class='co'># Following submissions will all be accepted:</span>
@@ -219,8 +219,8 @@ multiple solutions to a challenge.</p>
 
 <span class='co'># Example SCT</span>
 <span class='fu'>test_or</span>(
-  <span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='test_object.html'>check_object</a></span>(<span class='st'>'a'</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>(),
-  <span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='test_object.html'>check_object</a></span>(<span class='st'>'b'</span>) <span class='kw'>%&gt;%</span> <span class='no'>checK</span>-<span class='fu'>equal</span>()
+  <span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_object</span>(<span class='st'>'a'</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>(),
+  <span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_object</span>(<span class='st'>'b'</span>) <span class='kw'>%&gt;%</span> <span class='no'>checK</span>-<span class='fu'>equal</span>()
 )
 
 <span class='co'># Following submissions will all be accepted:</span>

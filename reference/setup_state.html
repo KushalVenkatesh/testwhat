@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Define the success message — success_msg • testwhat</title>
+<title>Set up state for local experimentation. — setup_state • testwhat</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -28,12 +28,12 @@
 
 
 
-<meta property="og:title" content="Define the success message — success_msg" />
+<meta property="og:title" content="Set up state for local experimentation. — setup_state" />
 
-<meta property="og:description" content="If all tests in an SCT pass, the student is presented with a 
-congratulatory message. You can specify this message with
-/codesuccess_msg(). It does not matter where in the SCT
-you specify this message, but at the end makes most sense." />
+<meta property="og:description" content="It runs both the solution and the student submission, and populates the state
+with parse data, output, etc. After running this function, the state is
+available thorugh ex, from which you can start your SCT chains.
+In a way, this function is a very light weight version of DataCamp's R Backend." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -133,50 +133,77 @@ you specify this message, but at the end makes most sense." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Define the success message</h1>
-    <small class="dont-index">Source: <a href='https://github.com/datacamp/testwhat/blob/master/R/success-msg.R'><code>R/success-msg.R</code></a></small>
-    <div class="hidden name"><code>success_msg.Rd</code></div>
+    <h1>Set up state for local experimentation.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/datacamp/testwhat/blob/master/R/utils-state.R'><code>R/utils-state.R</code></a></small>
+    <div class="hidden name"><code>setup_state.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>If all tests in an SCT pass, the student is presented with a 
-congratulatory message. You can specify this message with
-/codesuccess_msg(). It does not matter where in the SCT
-you specify this message, but at the end makes most sense.</p>
+    <p>It runs both the solution and the student submission, and populates the state
+with parse data, output, etc. After running this function, the state is
+available thorugh <code>ex</code>, from which you can start your SCT chains.
+In a way, this function is a very light weight version of DataCamp's R Backend.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>success_msg</span>(<span class='no'>msg</span>, <span class='kw'>praise</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>setup_state</span>(<span class='no'>sol_code</span>, <span class='no'>stu_code</span>, <span class='kw'>pec</span> <span class='kw'>=</span> <span class='fu'>character</span>(),
+  <span class='kw'>ex_type</span> <span class='kw'>=</span> <span class='st'>"NormalExercise"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>msg</th>
-      <td><p>The success message as a character string.</p></td>
+      <th>sol_code</th>
+      <td><p>Solution script as a string</p></td>
     </tr>
     <tr>
-      <th>praise</th>
-      <td><p>Whether or not to prepend a message of praise from the <code>praise</code> package.</p></td>
+      <th>stu_code</th>
+      <td><p>Student submission as a string. If it is not specified, the
+solution code will be used.</p></td>
+    </tr>
+    <tr>
+      <th>pec</th>
+      <td><p>Pre-exercise-code as a string</p></td>
+    </tr>
+    <tr>
+      <th>ex_type</th>
+      <td><p>Type of exercise as a string. Defaults to NormalExercise.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For multiple choice exercises, the success message is specified
-inside <code>test_mc</code>, so an additional call of <code>success_msg</code>
-is not necessary.</p>
+    <p>The exercise state, from which you can start chaining.</p>
+    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>This function is only supposed to be used locally when experimenting.
+  It should never be used in the eventual SCT script of an exercise.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>setup_state</span>(
+ <span class='kw'>sol_code</span> <span class='kw'>=</span> <span class='st'>"a &lt;- 1"</span>,
+ <span class='kw'>stu_code</span> <span class='kw'>=</span> <span class='st'>"a &lt;- 2"</span>
+)
+
+<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_object</span>(<span class='st'>'a'</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
-          </ul>
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#note">Note</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

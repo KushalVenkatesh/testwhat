@@ -146,27 +146,27 @@ output or error that is thrown by it.</p>
     <pre class="usage"><span class='fu'>check_expr</span>(<span class='no'>state</span>, <span class='no'>expr</span>)
 
 <span class='co'># S3 method for ExprState</span>
-<span class='fu'><a href='s3defs.html'>check_result</a></span>(<span class='no'>state</span>, <span class='kw'>error_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='fu'>check_result</span>(<span class='no'>state</span>, <span class='kw'>error_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>)
 
 <span class='co'># S3 method for ExprState</span>
-<span class='fu'><a href='check_output.html'>check_output</a></span>(<span class='no'>state</span>, <span class='kw'>error_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='fu'>check_output</span>(<span class='no'>state</span>, <span class='kw'>error_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>)
 
 <span class='co'># S3 method for ExprState</span>
-<span class='fu'><a href='check_error.html'>check_error</a></span>(<span class='no'>state</span>, <span class='kw'>no_error_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='fu'>check_error</span>(<span class='no'>state</span>, <span class='kw'>no_error_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='no'>...</span>)
 
 <span class='co'># S3 method for ExprResultState</span>
-<span class='fu'><a href='s3defs.html'>check_equal</a></span>(<span class='no'>state</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>check_equal</span>(<span class='no'>state</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>eq_condition</span> <span class='kw'>=</span> <span class='st'>"equivalent"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ExprOutputState</span>
-<span class='fu'><a href='s3defs.html'>check_equal</a></span>(<span class='no'>state</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>check_equal</span>(<span class='no'>state</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ExprErrorState</span>
-<span class='fu'><a href='s3defs.html'>check_equal</a></span>(<span class='no'>state</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>check_equal</span>(<span class='no'>state</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -206,7 +206,7 @@ the expression does not correspond with the solution</p></td>
     <tr>
       <th>eq_condition</th>
       <td><p>character string indicating how to compare. See
-<code><a href='is_equal.html'>is_equal</a></code>.</p></td>
+<code>is_equal</code>.</p></td>
     </tr>
     </table>
     
@@ -217,13 +217,13 @@ the expression does not correspond with the solution</p></td>
 <span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>6</span>)
 
 <span class='co'># SCT</span>
-<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_expr</span>(<span class='st'>"a[c(2, 4)]"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_result</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>()
+<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_expr</span>(<span class='st'>"a[c(2, 4)]"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_result</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
 
 <span class='co'># Example 2</span>
 <span class='no'>my_fun</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>() { <span class='fu'>print</span>(<span class='st'>'hello'</span>) }
 
 <span class='co'># SCT</span>
-<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_expr</span>(<span class='st'>"my_fun()"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='check_output.html'>check_output</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>()
+<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_expr</span>(<span class='st'>"my_fun()"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_output</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

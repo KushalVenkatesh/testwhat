@@ -113,14 +113,14 @@
 <div id="success-message" class="section level2">
 <h2 class="hasAnchor">
 <a href="#success-message" class="anchor"></a>Success message</h2>
-<p>When all tests in an SCT pass, <code>testwhat</code> will automatically generate a congratulatory message to present to the student. If you want to override this ‘success message’, you can use the <code><a href="../reference/success_msg.html">success_msg()</a></code> function:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/test_object.html">check_object</a></span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/s3defs.html">check_equal</a></span>()</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="../reference/success_msg.html">success_msg</a></span>(<span class="st">"Great job! You're getting goot at object assignment!"</span>)</a></code></pre></div>
+<p>When all tests in an SCT pass, <code>testwhat</code> will automatically generate a congratulatory message to present to the student. If you want to override this ‘success message’, you can use the <code>success_msg()</code> function:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">success_msg</span>(<span class="st">"Great job! You're getting goot at object assignment!"</span>)</a></code></pre></div>
 </div>
 <div id="multiple-choice-exercises" class="section level2">
 <h2 class="hasAnchor">
 <a href="#multiple-choice-exercises" class="anchor"></a>Multiple choice exercises</h2>
-<p>Multiple choice exercises are straightforward to test. Use <code><a href="../reference/test_mc.html">test_mc()</a></code> to provide tailored feedback for both the incorrect options, as the correct option. Below is the markdown source for a multiple choice exercise example, with an SCT that uses <code>test_mc</code>:</p>
+<p>Multiple choice exercises are straightforward to test. Use <code>test_mc()</code> to provide tailored feedback for both the incorrect options, as the correct option. Below is the markdown source for a multiple choice exercise example, with an SCT that uses <code>test_mc</code>:</p>
 <pre><code>## The author of R
 
 ```yaml
@@ -144,7 +144,7 @@ msg3 &lt;- "Correct! Head over to the next exercise!"
 test_mc(correct = 3, 
         feedback_msgs = c(msg1, msg2, msg3))
 ```</code></pre>
-<p>The first argument of <code><a href="../reference/test_mc.html">test_mc()</a></code>, <code>correct</code>, should be the number of the correct answer in this list. Here, the correct answer is Ross Ihaka, corresponding to 3. The <code>feedback_msgs</code> argument should be a list of strings with a length equal to the number of options. We encourage you to provide feedback messages that are informative and tailored to the (incorrect) option that people selected. Make sure to correctly order the feedback message such that it corresponds to the possible answers that are listed in the instructions tab. Notice that there’s no need for <code><a href="../reference/success_msg.html">success_msg()</a></code> in multiple choice exercises, as you have to specify the success message inside <code><a href="../reference/test_mc.html">test_mc()</a></code>, along with the feedback for incorrect options.</p>
+<p>The first argument of <code>test_mc()</code>, <code>correct</code>, should be the number of the correct answer in this list. Here, the correct answer is Ross Ihaka, corresponding to 3. The <code>feedback_msgs</code> argument should be a list of strings with a length equal to the number of options. We encourage you to provide feedback messages that are informative and tailored to the (incorrect) option that people selected. Make sure to correctly order the feedback message such that it corresponds to the possible answers that are listed in the instructions tab. Notice that there’s no need for <code>success_msg()</code> in multiple choice exercises, as you have to specify the success message inside <code>test_mc()</code>, along with the feedback for incorrect options.</p>
 </div>
 <div id="randomness" class="section level2">
 <h2 class="hasAnchor">
@@ -172,7 +172,7 @@ test_mc(correct = 3,
 <h2 class="hasAnchor">
 <a href="#blocking-solution-execution" class="anchor"></a>Blocking solution execution</h2>
 <p>An issue with R packages is that they’re often not developed by software developers. Sometimes, very specialized R packages only work in a certain context. More specifically, some packages expect data to be available in the global environment (the top of the search path).</p>
-<p>For <code>testwhat</code> and DataCamp’s R Backend it communicates with, this can cause problems: there’s a solution enviroment and a student environment (so that <code>testwhat</code> can easily compare objects that student created with the object that they should’ve created, for example with <code><a href="../reference/test_object.html">test_object()</a></code>). If the code that’s executed in the solution environment implicitly expects data to be available in the global environment (which is the student environment), things get messed up.</p>
+<p>For <code>testwhat</code> and DataCamp’s R Backend it communicates with, this can cause problems: there’s a solution enviroment and a student environment (so that <code>testwhat</code> can easily compare objects that student created with the object that they should’ve created, for example with <code>test_object()</code>). If the code that’s executed in the solution environment implicitly expects data to be available in the global environment (which is the student environment), things get messed up.</p>
 <p>To circumvent these errors, you can use the <code>SingleProcessExercise</code>. This is the same as a <code>NormalExercise</code>, but the backend will not execute the solution code in the solution environment, and the issues won’t appear. This does limit the power of the SCT: there are no objects available in the solution environment to compare with now. There are ways to work around this, though.</p>
 <p>As an example, suppose you want to test simple assignment, but for some reason you don’t want the solution code to execute in the solution environment:</p>
 <pre><code>--- type:SingleProcessExercise 
@@ -191,7 +191,7 @@ x &lt;- 5
 ```r
 ex() %&gt;% check_object('x')
 ```</code></pre>
-<p>because <code><a href="../reference/test_object.html">test_object()</a></code> will look for <code>x</code> in the solution environment and not find it. You can work around this by using the chained syntax and manually storing elements in the solution environment:</p>
+<p>because <code>test_object()</code> will look for <code>x</code> in the solution environment and not find it. You can work around this by using the chained syntax and manually storing elements in the solution environment:</p>
 <pre><code>*** =sct
 
 ```r

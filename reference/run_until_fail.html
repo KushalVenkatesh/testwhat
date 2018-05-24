@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Define the success message — success_msg • testwhat</title>
+<title>Run SCT until it fails — run_until_fail • testwhat</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -28,12 +28,9 @@
 
 
 
-<meta property="og:title" content="Define the success message — success_msg" />
+<meta property="og:title" content="Run SCT until it fails — run_until_fail" />
 
-<meta property="og:description" content="If all tests in an SCT pass, the student is presented with a 
-congratulatory message. You can specify this message with
-/codesuccess_msg(). It does not matter where in the SCT
-you specify this message, but at the end makes most sense." />
+<meta property="og:description" content="Run SCT until it fails" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -133,40 +130,27 @@ you specify this message, but at the end makes most sense." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Define the success message</h1>
-    <small class="dont-index">Source: <a href='https://github.com/datacamp/testwhat/blob/master/R/success-msg.R'><code>R/success-msg.R</code></a></small>
-    <div class="hidden name"><code>success_msg.Rd</code></div>
+    <h1>Run SCT until it fails</h1>
+    <small class="dont-index">Source: <a href='https://github.com/datacamp/testwhat/blob/master/R/test-exercise.R'><code>R/test-exercise.R</code></a></small>
+    <div class="hidden name"><code>run_until_fail.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>If all tests in an SCT pass, the student is presented with a 
-congratulatory message. You can specify this message with
-/codesuccess_msg(). It does not matter where in the SCT
-you specify this message, but at the end makes most sense.</p>
+    <p>Run SCT until it fails</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>success_msg</span>(<span class='no'>msg</span>, <span class='kw'>praise</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>run_until_fail</span>(<span class='no'>code</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>msg</th>
-      <td><p>The success message as a character string.</p></td>
-    </tr>
-    <tr>
-      <th>praise</th>
-      <td><p>Whether or not to prepend a message of praise from the <code>praise</code> package.</p></td>
+      <th>code</th>
+      <td><p>the SCT script to run as an expression</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>For multiple choice exercises, the success message is specified
-inside <code>test_mc</code>, so an additional call of <code>success_msg</code>
-is not necessary.</p>
     
 
   </div>
@@ -174,9 +158,7 @@ is not necessary.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#details">Details</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

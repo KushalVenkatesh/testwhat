@@ -113,7 +113,7 @@
 <div id="search-for-pattern-in-output" class="section level2">
 <h2 class="hasAnchor">
 <a href="#search-for-pattern-in-output" class="anchor"></a>Search for pattern in output</h2>
-<p><code><a href="../reference/check_output.html">check_output()</a></code> enables you to check for patterns or literal matches in the output the student generated with his or her submission. Where <code><a href="../reference/check_output.html">check_output_expr()</a></code> (see next section) <em>executes</em> the <code>expr</code> argument you pass it and then tries to match it to the student’s output, the <code><a href="../reference/check_output.html">check_output()</a></code> function doesn’t perform any execution: it simply looks for matches for the <code>pattern</code> you specify.</p>
+<p><code>check_output()</code> enables you to check for patterns or literal matches in the output the student generated with his or her submission. Where <code>check_output_expr()</code> (see next section) <em>executes</em> the <code>expr</code> argument you pass it and then tries to match it to the student’s output, the <code>check_output()</code> function doesn’t perform any execution: it simply looks for matches for the <code>pattern</code> you specify.</p>
 <div id="example" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h3>
@@ -121,7 +121,7 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Print out your name</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="st">"My name is DataCamp"</span></a></code></pre></div>
 <p>To allow for different names here, you can use the following SCT:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/check_output.html">check_output</a></span>(<span class="st">"[M|m]y name is [a-zA-Z]+?"</span>, <span class="dt">missing_msg =</span> <span class="st">"Have you printed out your name?"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_output</span>(<span class="st">"[M|m]y name is [a-zA-Z]+?"</span>, <span class="dt">missing_msg =</span> <span class="st">"Have you printed out your name?"</span>)</a></code></pre></div>
 <p>The regex allows you to allow both <code>my</code> and <code>My</code>, and to allow any name, as long as its first character is a letter and there’s at least one such character.</p>
 <p><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/regex.html">Click here to learn more about regular expressions in R</a>.</p>
 </div>
@@ -129,9 +129,9 @@
 <div id="search-if-student-output-contains-output-of-expression" class="section level2">
 <h2 class="hasAnchor">
 <a href="#search-if-student-output-contains-output-of-expression" class="anchor"></a>Search if student output contains output of expression</h2>
-<p><code><a href="../reference/check_output.html">check_output_expr()</a></code> executes the <code>expr</code> - an R expression as a string that you specify - and records the output it generates. Next, it tries to match this output to the output that the student generated with his or her submission. With <code>times</code> you can specify how often this match should occur, and with <code>incorrect_msg</code> you can override the automatically generated message in case the test failed.</p>
-<p><strong><code><a href="../reference/check_output.html">check_output_expr()</a></code> is used very often, typically to check if the student correctly printed out a variable, whatever its class</strong>. It is also pretty robust to different solutions: how people end up printing the variable doesn’t matter, as long as the output contains the correct info it’s all good.</p>
-<p><strong>WATCH OUT:</strong> <code><a href="../reference/check_output.html">check_output_expr()</a></code> is only appropriate to test <em>textual output</em>, so actual printouts to the console. It will not work to test function calls that do not generate any output, or that generate plot output. Using, for example, <code>test_output_contains("hist(mtcars$mpg)")</code> to test whether a student correctly created a histogram of the <code>mpg</code> column of <code>mtcars</code> makes no sense: the <code>hist()</code> function does not generate textual output that can be captured with <code>capture.output()</code>.</p>
+<p><code>check_output_expr()</code> executes the <code>expr</code> - an R expression as a string that you specify - and records the output it generates. Next, it tries to match this output to the output that the student generated with his or her submission. With <code>times</code> you can specify how often this match should occur, and with <code>incorrect_msg</code> you can override the automatically generated message in case the test failed.</p>
+<p><strong><code>check_output_expr()</code> is used very often, typically to check if the student correctly printed out a variable, whatever its class</strong>. It is also pretty robust to different solutions: how people end up printing the variable doesn’t matter, as long as the output contains the correct info it’s all good.</p>
+<p><strong>WATCH OUT:</strong> <code>check_output_expr()</code> is only appropriate to test <em>textual output</em>, so actual printouts to the console. It will not work to test function calls that do not generate any output, or that generate plot output. Using, for example, <code>test_output_contains("hist(mtcars$mpg)")</code> to test whether a student correctly created a histogram of the <code>mpg</code> column of <code>mtcars</code> makes no sense: the <code>hist()</code> function does not generate textual output that can be captured with <code>capture.output()</code>.</p>
 <div id="example-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-1" class="anchor"></a>Example</h3>
@@ -139,8 +139,8 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Print out the fourth row of mtcars</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">mtcars[<span class="dv">4</span>, ]</a></code></pre></div>
 <p>The following SCT would check this:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/check_output.html">check_output_expr</a></span>(<span class="st">"mtcars[4, ]"</span>, <span class="dt">missing_msg =</span> <span class="st">"Have you used `[4, ]` to print out the fourth row of `mtcars`?"</span>)</a></code></pre></div>
-<p>You simply pass the expression that would generate the correct printout as an expression, and <code><a href="../reference/check_output.html">check_output_expr()</a></code> takes care of the rest. You can also use a custom <code>missing_msg</code> to give meaningful feedback to the student.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_output_expr</span>(<span class="st">"mtcars[4, ]"</span>, <span class="dt">missing_msg =</span> <span class="st">"Have you used `[4, ]` to print out the fourth row of `mtcars`?"</span>)</a></code></pre></div>
+<p>You simply pass the expression that would generate the correct printout as an expression, and <code>check_output_expr()</code> takes care of the rest. You can also use a custom <code>missing_msg</code> to give meaningful feedback to the student.</p>
 </div>
 </div>
   </div>

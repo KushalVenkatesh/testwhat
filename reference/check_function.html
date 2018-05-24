@@ -154,7 +154,7 @@ can be used.</p>
 <span class='fu'>check_arg</span>(<span class='no'>state</span>, <span class='no'>arg</span>, <span class='kw'>arg_not_specified_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for ArgumentState</span>
-<span class='fu'><a href='s3defs.html'>check_equal</a></span>(<span class='no'>state</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>check_equal</span>(<span class='no'>state</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>eval</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>eq_condition</span> <span class='kw'>=</span> <span class='st'>"equivalent"</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -215,7 +215,7 @@ in a sub-SCT where the environments are not unambiguously available.</p></td>
     <tr>
       <th>eq_condition</th>
       <td><p>character vector indicating how to perform the
-comparison for each argument. See <code><a href='is_equal.html'>is_equal</a></code></p></td>
+comparison for each argument. See <code>is_equal</code></p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -230,21 +230,21 @@ comparison for each argument. See <code><a href='is_equal.html'>is_equal</a></co
 <span class='fu'>mean</span>(<span class='fl'>1</span>:<span class='fl'>3</span>)
 
 <span class='co'># SCT</span>
-<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_function</span>(<span class='st'>"mean"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_arg</span>(<span class='st'>"x"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>()
+<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_function</span>(<span class='st'>"mean"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_arg</span>(<span class='st'>"x"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
 
 <span class='co'># Example 2</span>
 <span class='fu'>mean</span>(<span class='fu'>c</span>(<span class='fl'>NA</span>, <span class='fl'>1</span>, <span class='fl'>2</span>), <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># SCT</span>
 <span class='no'>funstate</span> <span class='kw'>&lt;-</span> <span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_function</span>(<span class='st'>"mean"</span>)
-<span class='no'>funstate</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_arg</span>(<span class='st'>"x"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>()
-<span class='no'>funstate</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_arg</span>(<span class='st'>"na.rm"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>()
+<span class='no'>funstate</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_arg</span>(<span class='st'>"x"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
+<span class='no'>funstate</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_arg</span>(<span class='st'>"na.rm"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
 
 <span class='co'># Example 3</span>
 <span class='fl'>5</span> + <span class='fl'>4</span>
 
 <span class='co'># SCT</span>
-<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_operator</span>(<span class='st'>"+"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_result</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>()
+<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_operator</span>(<span class='st'>"+"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_result</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>

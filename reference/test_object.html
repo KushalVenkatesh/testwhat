@@ -148,15 +148,15 @@
 <span class='fu'>check_element</span>(<span class='no'>state</span>, <span class='no'>el</span>, <span class='kw'>el_missing_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for ObjectState</span>
-<span class='fu'><a href='s3defs.html'>check_equal</a></span>(<span class='no'>state</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>check_equal</span>(<span class='no'>state</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>eq_condition</span> <span class='kw'>=</span> <span class='st'>"equivalent"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ObjectColumnState</span>
-<span class='fu'><a href='s3defs.html'>check_equal</a></span>(<span class='no'>state</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>check_equal</span>(<span class='no'>state</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>eq_condition</span> <span class='kw'>=</span> <span class='st'>"equivalent"</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ObjectElementState</span>
-<span class='fu'><a href='s3defs.html'>check_equal</a></span>(<span class='no'>state</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>check_equal</span>(<span class='no'>state</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>append</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>eq_condition</span> <span class='kw'>=</span> <span class='st'>"equivalent"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -204,7 +204,7 @@ not the same as in the sample solution.</p></td>
     <tr>
       <th>eq_condition</th>
       <td><p>character string indicating how to compare. See 
-<code><a href='is_equal.html'>is_equal</a></code>.</p></td>
+<code>is_equal</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -219,7 +219,7 @@ not the same as in the sample solution.</p></td>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>mean</span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># SCT</span>
-<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_object</span>(<span class='st'>"x"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>()
+<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_object</span>(<span class='st'>"x"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
 
 <span class='co'># Example 2</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>mean</span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
@@ -231,13 +231,13 @@ not the same as in the sample solution.</p></td>
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>data.frame</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>3</span>])
 
 <span class='co'># SCT to test column a</span>
-<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_object</span>(<span class='st'>"df"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_column</span>(<span class='st'>"a"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>()
+<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_object</span>(<span class='st'>"df"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_column</span>(<span class='st'>"a"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
 
 <span class='co'># Example 4</span>
 <span class='no'>lst</span> <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 
 <span class='co'># SCT to test only element b</span>
-<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_object</span>(<span class='st'>"lst"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_element</span>(<span class='st'>"b"</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='s3defs.html'>check_equal</a></span>()
+<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_object</span>(<span class='st'>"lst"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_element</span>(<span class='st'>"b"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

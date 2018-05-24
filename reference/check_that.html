@@ -6,12 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Expectation wrapper
-	
-This function wraps around an is_... function. When the expectation fails to	
-be met, the feedback message is sent to the reporter. You can use 	
-<code><a href='is_true.html'>is_true</a></code>, <code><a href='is_false.html'>is_false</a></code>, <code><a href='is_gte.html'>is_gte</a></code> or	
-<code><a href='is_equal.html'>is_equal</a></code> — check_that • testwhat</title>
+<title>Expectation wrapper — check_that • testwhat</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -33,17 +28,11 @@ be met, the feedback message is sent to the reporter. You can use
 
 
 
-<meta property="og:title" content="Expectation wrapper
-	
-This function wraps around an is_... function. When the expectation fails to	
-be met, the feedback message is sent to the reporter. You can use 	
-<code><a href='is_true.html'>is_true</a></code>, <code><a href='is_false.html'>is_false</a></code>, <code><a href='is_gte.html'>is_gte</a></code> or	
-<code><a href='is_equal.html'>is_equal</a></code> — check_that" />
+<meta property="og:title" content="Expectation wrapper — check_that" />
 
-<meta property="og:description" content="Expectation wrapper	
-This function wraps around an is_... function. When the expectation fails to	
-be met, the feedback message is sent to the reporter. You can use 	
-is_true, is_false, is_gte or	
+<meta property="og:description" content="This function wraps around an is_... function. When the expectation fails to
+be met, the feedback message is sent to the reporter. You can use
+is_true, is_false, is_gte or
 is_equal" />
 <meta name="twitter:card" content="summary" />
 
@@ -144,27 +133,23 @@ is_equal" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Expectation wrapper
-	
-This function wraps around an is_... function. When the expectation fails to	
-be met, the feedback message is sent to the reporter. You can use 	
-<code><a href='is_true.html'>is_true</a></code>, <code><a href='is_false.html'>is_false</a></code>, <code><a href='is_gte.html'>is_gte</a></code> or	
-<code><a href='is_equal.html'>is_equal</a></code></h1>
+    <h1>Expectation wrapper</h1>
     <small class="dont-index">Source: <a href='https://github.com/datacamp/testwhat/blob/master/R/check-that.R'><code>R/check-that.R</code></a></small>
     <div class="hidden name"><code>check_that.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Expectation wrapper</p>	
-<p>This function wraps around an is_... function. When the expectation fails to	
-be met, the feedback message is sent to the reporter. You can use 	
-<code><a href='is_true.html'>is_true</a></code>, <code><a href='is_false.html'>is_false</a></code>, <code><a href='is_gte.html'>is_gte</a></code> or	
-<code><a href='is_equal.html'>is_equal</a></code></p>
+    <p>This function wraps around an is_... function. When the expectation fails to
+be met, the feedback message is sent to the reporter. You can use
+<code>is_true</code>, <code>is_false</code>, <code>is_gte</code> or
+<code>is_equal</code></p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>check_that</span>(<span class='no'>code</span>, <span class='no'>feedback</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>())</pre>
+    <pre class="usage"><span class='fu'>check_that</span>(<span class='no'>code</span>, <span class='no'>feedback</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>())
+
+<span class='fu'>test_what</span>(<span class='no'>code</span>, <span class='no'>feedback</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -176,7 +161,7 @@ be met, the feedback message is sent to the reporter. You can use
     <tr>
       <th>feedback</th>
       <td><p>A character string with feedback when the expection is not
-met OR a list object, containing multiple pieces of information. This list    
+met OR a list object, containing multiple pieces of information. This list
 should at least contain an element named <code>message</code></p></td>
     </tr>
     <tr>
@@ -188,12 +173,11 @@ should at least contain an element named <code>message</code></p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>check_that</span>(<span class='fu'><a href='is_true.html'>is_true</a></span>(<span class='fl'>3</span> <span class='kw'>==</span> <span class='fl'>3</span>))
-<span class='fu'>check_that</span>(<span class='fu'><a href='is_false.html'>is_false</a></span>(<span class='fl'>3</span> <span class='kw'>==</span> <span class='fl'>4</span>))
-<span class='fu'>check_that</span>(<span class='fu'><a href='is_gte.html'>is_gte</a></span>(<span class='fl'>4</span>, <span class='fl'>3</span>))
-<span class='fu'>check_that</span>(<span class='fu'><a href='is_equal.html'>is_equal</a></span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
-<span class='co'># }</span><div class='input'>	
-</div></pre>
+<span class='fu'>check_that</span>(<span class='fu'>is_true</span>(<span class='fl'>3</span> <span class='kw'>==</span> <span class='fl'>3</span>))
+<span class='fu'>check_that</span>(<span class='fu'>is_false</span>(<span class='fl'>3</span> <span class='kw'>==</span> <span class='fl'>4</span>))
+<span class='fu'>check_that</span>(<span class='fu'>is_gte</span>(<span class='fl'>4</span>, <span class='fl'>3</span>))
+<span class='fu'>check_that</span>(<span class='fu'>is_equal</span>(<span class='fl'>4</span>, <span class='fl'>4</span>))
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

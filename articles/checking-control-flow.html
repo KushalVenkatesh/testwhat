@@ -110,7 +110,7 @@
 
     
     
-<p>You can use <code><a href="../reference/check_control.html">check_for()</a></code>, <code><a href="../reference/check_control.html">check_while()</a></code> and <code><a href="../reference/check_control.html">check_if_else()</a></code> chains to check whether a student has properly coded control constructs.</p>
+<p>You can use <code>check_for()</code>, <code>check_while()</code> and <code>check_if_else()</code> chains to check whether a student has properly coded control constructs.</p>
 <div id="example-1-for-loop" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-1-for-loop" class="anchor"></a>Example 1: For loop</h2>
@@ -120,14 +120,14 @@
 <a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="kw">print</span>(i)</a>
 <a class="sourceLine" id="cb1-4" data-line-number="4">}</a></code></pre></div>
 <p>A suitable SCT for this exercise can be the following:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">forloop &lt;-<span class="st"> </span><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/check_control.html">check_for</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>{</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw"><a href="../reference/check_control.html">check_cond</a></span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/check_code.html">check_code</a></span>(<span class="st">"in</span><span class="ch">\\</span><span class="st">s*1:10"</span>, <span class="dt">missing_msg =</span> <span class="st">"You can use `i in 1:10` to define your for loop."</span>)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="kw"><a href="../reference/s3defs.html">check_body</a></span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/check_function.html">check_function</a></span>(<span class="st">"print"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/check_function.html">check_arg</a></span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/s3defs.html">check_equal</a></span>(<span class="dt">eval =</span> <span class="ot">FALSE</span>)</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">forloop &lt;-<span class="st"> </span><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_for</span>() <span class="op">%&gt;%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">check_cond</span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_code</span>(<span class="st">"in</span><span class="ch">\\</span><span class="st">s*1:10"</span>, <span class="dt">missing_msg =</span> <span class="st">"You can use `i in 1:10` to define your for loop."</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="kw">check_body</span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"print"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_arg</span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>(<span class="dt">eval =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">}</a></code></pre></div>
 <ul>
 <li>
-<code><a href="../reference/check_control.html">check_for()</a></code> checks whether students have specified a <code>for</code> loop in their code. If this is the case, it produces a substate, referring to the condition of the for loop and its body.</li>
-<li>Next, you can ‘zoom in’ on the condition and body of the <code>for</code> loop, using <code><a href="../reference/check_control.html">check_cond()</a></code> and <code><a href="../reference/s3defs.html">check_body()</a></code> respectively. After this zooming in, you can continue the chain of SCT functions to check these ‘parts’ of the code. The <code><a href="../reference/check_code.html">check_code()</a></code> call, for example, only looks to match the regular expression in the iteration part of the <code>for</code> loop.</li>
+<code>check_for()</code> checks whether students have specified a <code>for</code> loop in their code. If this is the case, it produces a substate, referring to the condition of the for loop and its body.</li>
+<li>Next, you can ‘zoom in’ on the condition and body of the <code>for</code> loop, using <code>check_cond()</code> and <code>check_body()</code> respectively. After this zooming in, you can continue the chain of SCT functions to check these ‘parts’ of the code. The <code>check_code()</code> call, for example, only looks to match the regular expression in the iteration part of the <code>for</code> loop.</li>
 </ul>
 </div>
 <div id="example-2-check-if-else" class="section level2">
@@ -144,17 +144,17 @@
 <a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="kw">print</span>(<span class="st">"x is not TRUE!"</span>)</a>
 <a class="sourceLine" id="cb3-9" data-line-number="9">}</a></code></pre></div>
 <p>The following SCT checks its correctness:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/test_object.html">check_object</a></span>(<span class="st">"x"</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/check_control.html">check_if_else</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>{</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="kw"><a href="../reference/check_control.html">check_cond</a></span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/check_code.html">check_code</a></span>(<span class="st">"x"</span>)</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="kw"><a href="../reference/check_control.html">check_if</a></span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/check_function.html">check_function</a></span>(<span class="st">"print"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/check_function.html">check_arg</a></span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/s3defs.html">check_equal</a></span>()</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="kw"><a href="../reference/check_control.html">check_else</a></span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/check_function.html">check_function</a></span>(<span class="st">"print"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/check_function.html">check_arg</a></span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/s3defs.html">check_equal</a></span>()</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"x"</span>)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_if_else</span>() <span class="op">%&gt;%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="kw">check_cond</span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_code</span>(<span class="st">"x"</span>)</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="kw">check_if</span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"print"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_arg</span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="kw">check_else</span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"print"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_arg</span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
 <a class="sourceLine" id="cb4-6" data-line-number="6">}</a></code></pre></div>
 <ul>
 <li>
-<code><a href="../reference/check_control.html">check_if_else()</a></code> parses the student code and checks if there is an if-else statement in there.</li>
+<code>check_if_else()</code> parses the student code and checks if there is an if-else statement in there.</li>
 <li>
-<code>check_cond</code>, <code>check_if</code>, and <code><a href="../reference/check_control.html">check_else()</a></code> all ‘zoom in’ on a particular part of the if-else statement: the condition, the body of the <code>if</code> statement and the body of the <code>else</code> statement. After this zooming in, you can continue the chain of SCT functions to check these ‘parts’ of the code. The first <code><a href="../reference/check_function.html">check_function("print")</a></code> chain for example, only looks for the function call inside the <code>if</code> body.</li>
+<code>check_cond</code>, <code>check_if</code>, and <code>check_else()</code> all ‘zoom in’ on a particular part of the if-else statement: the condition, the body of the <code>if</code> statement and the body of the <code>else</code> statement. After this zooming in, you can continue the chain of SCT functions to check these ‘parts’ of the code. The first <code>check_function("print")</code> chain for example, only looks for the function call inside the <code>if</code> body.</li>
 </ul>
 <div id="example-3-check-if-else-if-else" class="section level3">
 <h3 class="hasAnchor">
@@ -178,13 +178,13 @@
 <a class="sourceLine" id="cb6-8" data-line-number="8">  }</a>
 <a class="sourceLine" id="cb6-9" data-line-number="9">}</a></code></pre></div>
 <p>If you want to test such a piece of code, you therefore need the following construct:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/check_control.html">check_if_else</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>{</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="kw"><a href="../reference/check_control.html">check_cond</a></span>(.) <span class="op">%&gt;%</span><span class="st"> </span>...</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="kw"><a href="../reference/check_control.html">check_if</a></span>(.) <span class="op">%&gt;%</span><span class="st"> </span>...</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="kw"><a href="../reference/check_control.html">check_else</a></span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/check_control.html">check_if_else</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>{</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">    <span class="kw"><a href="../reference/check_control.html">check_cond</a></span>(.) <span class="op">%&gt;%</span><span class="st"> </span>...</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">    <span class="kw"><a href="../reference/check_control.html">check_if</a></span>(.) <span class="op">%&gt;%</span><span class="st"> </span>...</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">    <span class="kw"><a href="../reference/check_control.html">check_else</a></span>(.) <span class="op">%&gt;%</span><span class="st"> </span>...</a>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_if_else</span>() <span class="op">%&gt;%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="kw">check_cond</span>(.) <span class="op">%&gt;%</span><span class="st"> </span>...</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="kw">check_if</span>(.) <span class="op">%&gt;%</span><span class="st"> </span>...</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">  <span class="kw">check_else</span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_if_else</span>() <span class="op">%&gt;%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">    <span class="kw">check_cond</span>(.) <span class="op">%&gt;%</span><span class="st"> </span>...</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">    <span class="kw">check_if</span>(.) <span class="op">%&gt;%</span><span class="st"> </span>...</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">    <span class="kw">check_else</span>(.) <span class="op">%&gt;%</span><span class="st"> </span>...</a>
 <a class="sourceLine" id="cb7-8" data-line-number="8">  }</a>
 <a class="sourceLine" id="cb7-9" data-line-number="9">}</a></code></pre></div>
 </div>
@@ -192,7 +192,7 @@
 <div id="caution" class="section level2">
 <h2 class="hasAnchor">
 <a href="#caution" class="anchor"></a>Caution</h2>
-<p>Not all of the SCT chains that you specify after a ‘zooming in’ step might work as you’d expect. Remind that functions like <code><a href="../reference/test_object.html">test_object()</a></code> and <code>test_function()</code> often depend on both the student and solution environment. It is possible that during execution of control flow these values change. The <code>testwhat</code> functions will always compare the ‘end environment’ of student and solution, it is not possible to do matching on intermediate values of objects that are changed further in the script.</p>
+<p>Not all of the SCT chains that you specify after a ‘zooming in’ step might work as you’d expect. Remind that functions like <code>test_object()</code> and <code>test_function()</code> often depend on both the student and solution environment. It is possible that during execution of control flow these values change. The <code>testwhat</code> functions will always compare the ‘end environment’ of student and solution, it is not possible to do matching on intermediate values of objects that are changed further in the script.</p>
 </div>
   </div>
 

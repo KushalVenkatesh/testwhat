@@ -110,16 +110,16 @@
 
     
     
-<p><code><a href="../reference/test_object.html">check_object()</a></code> is the start of your SCT chains to check whether students have correctly defined objects.</p>
+<p><code>check_object()</code> is the start of your SCT chains to check whether students have correctly defined objects.</p>
 <div id="example-1-simple-object" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-1-simple-object" class="anchor"></a>Example 1: Simple object</h3>
 <p>Consider the following solution:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Create the variable x</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">15</span></a></code></pre></div>
-<p>You don’t care too much about how <code>x</code> was created, as long as it’s defined and refers to the correct value. To test this robustly, you can use <code><a href="../reference/test_object.html">check_object()</a></code> in your SCT:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/test_object.html">check_object</a></span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/s3defs.html">check_equal</a></span>()</a></code></pre></div>
-<p><code><a href="../reference/test_object.html">check_object()</a></code> will check if the variable <code>x</code> is defined in the student environment; <code><a href="../reference/s3defs.html">check_equal()</a></code> will check whether its value is the same as <code>x</code> in the solution environment. All of the following student submissions will be accepted by <code><a href="../reference/test_object.html">check_object()</a></code>:</p>
+<p>You don’t care too much about how <code>x</code> was created, as long as it’s defined and refers to the correct value. To test this robustly, you can use <code>check_object()</code> in your SCT:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a></code></pre></div>
+<p><code>check_object()</code> will check if the variable <code>x</code> is defined in the student environment; <code>check_equal()</code> will check whether its value is the same as <code>x</code> in the solution environment. All of the following student submissions will be accepted by <code>check_object()</code>:</p>
 <ul>
 <li><code>x &lt;- 15</code></li>
 <li><code>x &lt;- 12 + 3</code></li>
@@ -133,8 +133,8 @@
 <p>Say that you want the student to create an object <code>x</code>, but you don’t care what the contents of the variable are:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Create an arbitrary object x</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">123</span></a></code></pre></div>
-<p>Simply drop the <code><a href="../reference/s3defs.html">check_equal()</a></code> bit in your SCT:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/test_object.html">check_object</a></span>(<span class="st">"x"</span>)</a></code></pre></div>
+<p>Simply drop the <code>check_equal()</code> bit in your SCT:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"x"</span>)</a></code></pre></div>
 </div>
 <div id="example-3-eq_condition" class="section level3">
 <h3 class="hasAnchor">
@@ -144,7 +144,7 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Create the list l</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">l &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">2</span>, <span class="dt">b =</span> <span class="dv">3</span>, <span class="dt">c =</span> <span class="dv">4</span>)</a></code></pre></div>
 <p>To test this list, you can use the following SCT:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/test_object.html">check_object</a></span>(<span class="st">"l"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/s3defs.html">check_equal</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"l"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a></code></pre></div>
 <ul>
 <li>
 <p><code>eq_condition = "equivalent"</code> by default, meaning that the names of the data structure are not checked. If the student creates a list <code>l</code> as follows:</p>
@@ -153,7 +153,7 @@
 </li>
 <li>
 <p>If you set <code>eq_condition = "equal"</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/test_object.html">check_object</a></span>(<span class="st">"l"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/s3defs.html">check_equal</a></span>(<span class="dt">eq_condition =</span> <span class="st">"equal"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"l"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>(<span class="dt">eq_condition =</span> <span class="st">"equal"</span>)</a></code></pre></div>
 <p>the data structure’s attributes, such as its names, are also checked. Now,</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">l &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">d =</span> <span class="dv">2</span>, <span class="dt">e =</span> <span class="dv">3</span>, <span class="dt">f =</span> <span class="dv">4</span>)</a></code></pre></div>
 <p>will not be accepted</p>
@@ -163,12 +163,12 @@
 <div id="example-4-automated-feedback-messages" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-4-automated-feedback-messages" class="anchor"></a>Example 4: Automated feedback messages</h3>
-<p>Just like for <code><a href="../reference/s3defs.html">check_equal()</a></code> in the <code><a href="../reference/check_function.html">check_function()</a></code>-induced SCT chain, the automatic messages that are generated when the student makes mistakes of different kinds is continuously improved to be as insightful as possible. For example, when the solution expects:</p>
+<p>Just like for <code>check_equal()</code> in the <code>check_function()</code>-induced SCT chain, the automatic messages that are generated when the student makes mistakes of different kinds is continuously improved to be as insightful as possible. For example, when the solution expects:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">x =<span class="st"> </span><span class="dv">123</span></a></code></pre></div>
 <p>but the student submits:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">x =<span class="st"> "123"</span></a></code></pre></div>
 <p>An SCT that contains</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/test_object.html">check_object</a></span>(<span class="st">'x'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/s3defs.html">check_equal</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">'x'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a></code></pre></div>
 <p>will mention: “<code>x</code> is a character string, while it should be a number.”. When comparing character strings between student and solution, this comparison goes further, hinting about potential incorrect capitalization, incorrect spacing, incorrect punctuation or possible typos.</p>
 </div>
 <div id="example-5-complex-objects" class="section level3">
@@ -183,10 +183,10 @@
 <a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co"># Add a column tot, sum of count1 and count2</span></a>
 <a class="sourceLine" id="cb13-7" data-line-number="7">df<span class="op">$</span>tot &lt;-<span class="st"> </span>df<span class="op">$</span>count1 <span class="op">+</span><span class="st"> </span>df<span class="op">$</span>count2</a></code></pre></div>
 <p>To check whether the student correctly added this column, you can use the following SCT. As usual, the function is able to produce meaningful feedback in case of failure, but these messages can be overridden. To explain the meaning of the different steps, we have specified custom messages for each one of them:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/test_object.html">check_object</a></span>(<span class="st">"df"</span>, <span class="dt">undefined_msg =</span> <span class="st">"Make sure to not remove `df`!"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/test_object.html">check_column</a></span>(<span class="st">"tot"</span>, <span class="dt">col_missing_msg =</span> <span class="st">"Have you added the column `tot` to `df`?"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/s3defs.html">check_equal</a></span>(<span class="dt">incorrect_msg =</span> <span class="st">"Have you correctly calculated the column `tot` based on `count1` and `count2`?"</span>)</a></code></pre></div>
-<p>Equivalent to <code><a href="../reference/test_object.html">check_column()</a></code>, <code>testwhat</code> also features the <code><a href="../reference/test_object.html">check_element()</a></code> function to check the equality of list elements. The only difference with <code><a href="../reference/test_object.html">check_column()</a></code> is the automatic feedback message that is generated, as a data frame is a list object and its elements are the columns.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"df"</span>, <span class="dt">undefined_msg =</span> <span class="st">"Make sure to not remove `df`!"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw">check_column</span>(<span class="st">"tot"</span>, <span class="dt">col_missing_msg =</span> <span class="st">"Have you added the column `tot` to `df`?"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="st">  </span><span class="kw">check_equal</span>(<span class="dt">incorrect_msg =</span> <span class="st">"Have you correctly calculated the column `tot` based on `count1` and `count2`?"</span>)</a></code></pre></div>
+<p>Equivalent to <code>check_column()</code>, <code>testwhat</code> also features the <code>check_element()</code> function to check the equality of list elements. The only difference with <code>check_column()</code> is the automatic feedback message that is generated, as a data frame is a list object and its elements are the columns.</p>
 </div>
   </div>
 
