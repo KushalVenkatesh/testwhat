@@ -70,10 +70,22 @@
       <a href="../articles/combining-sets-of-scts.html">Combining sets of SCTs</a>
     </li>
     <li>
-      <a href="../articles/extensions.html">Extensions</a>
+      <a href="../articles/electives.html">Electives</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Advanced
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/test-to-check.html">Test to Check</a>
     </li>
     <li>
-      <a href="../articles/electives.html">Electives</a>
+      <a href="../articles/extensions.html">Extensions</a>
     </li>
   </ul>
 </li>
@@ -138,7 +150,8 @@
 <li>
 <code>check_body()</code> executes tests in the substate of the body of the function definition (as if the body of the function was the only code in the student submission). If, for example, the student used <code>abs()</code> outside the function definition, this would be ignored. Notice here that no arguments are specified. If we did this, <code>test_function()</code> would compare the actual values of the arguments. This is information that is not available, as <code>a</code> and <code>b</code> are not variables that are available in the workspace, only in the scope of the function. If all of the calls in <code>body_test</code> pass, the tests in <code>function_test</code> are executed again, this time not silently, and thus able to generate feedback messages.</li>
 </ul>
-</div>
+<p><strong>Note:</strong> in addition to <code>check_result()</code>, you can also pipe the result of <code>check_call()</code> into <code>check_output()</code> and <code>check_error()</code>. These functions will respectively check the output and error the function call generated when executed in the student/solution environment.</p>
+  </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
       </div>

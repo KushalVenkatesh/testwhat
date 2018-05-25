@@ -71,10 +71,22 @@
       <a href="articles/combining-sets-of-scts.html">Combining sets of SCTs</a>
     </li>
     <li>
-      <a href="articles/extensions.html">Extensions</a>
+      <a href="articles/electives.html">Electives</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Advanced
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/test-to-check.html">Test to Check</a>
     </li>
     <li>
-      <a href="articles/electives.html">Electives</a>
+      <a href="articles/extensions.html">Extensions</a>
     </li>
   </ul>
 </li>
@@ -111,26 +123,42 @@
 <li>For a complete overview of all functionality inside <code>testwhat</code> and articles about what to use when, consult <a href="https://datacamp.github.io/testwhat" class="uri">https://datacamp.github.io/testwhat</a>.</li>
 </ul>
 <p>For details, questions and suggestions, <a href="mailto:content-engineering@datacamp.com">contact us</a>.</p>
-<div id="development" class="section level2">
+<div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#development" class="anchor"></a>Development</h2>
-<div id="installation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"devtools"</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"datacamp/testwhat"</span>)</a></code></pre></div>
+<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(<span class="st">"remotes"</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">install_github</span>(<span class="st">"datacamp/testwhat"</span>)</a></code></pre></div>
 </div>
-<div id="tests" class="section level3">
-<h3 class="hasAnchor">
-<a href="#tests" class="anchor"></a>Tests</h3>
+<div id="demo" class="section level2">
+<h2 class="hasAnchor">
+<a href="#demo" class="anchor"></a>Demo</h2>
+<p>Experimenting locally:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(testwhat)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">setup_state</span>(<span class="dt">sol_code =</span> <span class="st">"x &lt;- 5"</span>,</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">            <span class="dt">stu_code =</span> <span class="st">"x &lt;- 4"</span>)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"x"</span>)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co"># No error: x is defined in both student and solution code</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co"># Error: The contents of the variable `x` aren't correct.</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co"># Debugging state</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">s &lt;-<span class="st"> </span><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>()</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">s        <span class="co"># only prints out state class</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="kw">str</span>(s)   <span class="co"># full overview of state</span></a></code></pre></div>
+<p>To include an SCT in a DataCamp course, visit <a href="https://authoring.datacamp.com" class="uri">https://authoring.datacamp.com</a>.</p>
+</div>
+<div id="tests" class="section level2">
+<h2 class="hasAnchor">
+<a href="#tests" class="anchor"></a>Tests</h2>
 <p><code>testwhat</code> currently depends on the proprietary <code>RBackend</code> and <code>RCompletion</code> packages to run tests. Tests run automatically on every branch that is updated through travis.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/test">test</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/test">test</a></span>()</a></code></pre></div>
 </div>
-<div id="documentation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#documentation" class="anchor"></a>Documentation</h3>
+<div id="documentation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#documentation" class="anchor"></a>Documentation</h2>
 <p>Whenever a push is done to the <code>master</code> branch, this repo will automatically build a <code>pkgdown</code> website (containing reference documentation and vignettes), push it to the <code>gh-pages</code> branch, which in turn is served by GitHub at <a href="https://datacamp.github.io/testwhat" class="uri">https://datacamp.github.io/testwhat</a>.</p>
-</div>
 </div>
 </div>
   </div>

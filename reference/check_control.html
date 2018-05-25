@@ -99,10 +99,22 @@
       <a href="../articles/combining-sets-of-scts.html">Combining sets of SCTs</a>
     </li>
     <li>
-      <a href="../articles/extensions.html">Extensions</a>
+      <a href="../articles/electives.html">Electives</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Advanced
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/test-to-check.html">Test to Check</a>
     </li>
     <li>
-      <a href="../articles/electives.html">Electives</a>
+      <a href="../articles/extensions.html">Extensions</a>
     </li>
   </ul>
 </li>
@@ -183,52 +195,62 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Example 1: if else</span>
-<span class='no'>vec</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>)
-<span class='kw'>if</span>(<span class='st'>"a"</span> <span class='kw'>%in%</span> <span class='no'>vec</span>) {
- <span class='fu'>print</span>(<span class='st'>"a in here"</span>)
-} <span class='kw'>else</span> <span class='kw'>if</span>(<span class='fu'>any</span>(<span class='st'>"b"</span> <span class='kw'>&gt;</span> <span class='no'>vec</span>)) {
- <span class='fu'>cat</span>(<span class='st'>"b not smallest"</span>)
-} <span class='kw'>else</span> {
- <span class='fu'>str</span>(<span class='no'>vec</span>)
+    <pre class="examples"># NOT RUN {
+# Example 1: if else
+vec <- c("a", "b", "c")
+if("a" %in% vec) {
+ print("a in here")
+} else if(any("b" > vec)) {
+ cat("b not smallest")
+} else {
+ str(vec)
+}
+                                           
+# SCT
+check_if_else(1) %>%  {
+  check_cond(.) %>% {
+    check_code(., "%in%")
+    check_code(., "vec")
+  }
+  check_if(.) %>% check_function(., "print")
+  check_else(.) %>% check_if_else() {
+    check_cond(.) %>% check_code(">")
+    check_if(.) %>% check_function("cat")
+    check_else(.) %>% check_function("str")
+  }
 }
 
-<span class='co'># SCT</span>
-<span class='no'>ifelse</span> <span class='kw'>&lt;-</span> <span class='fu'>check_if_else</span>(<span class='fl'>1</span>)
-<span class='no'>ifelse</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_cond</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_code</span>(<span class='st'>"%in%"</span>)
-<span class='no'>ifelse</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_cond</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_code</span>(<span class='st'>"vec"</span>)
-<span class='no'>ifelse</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_if</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_function</span>(<span class='st'>"print"</span>)
-<span class='no'>nestedifelse</span> <span class='kw'>&lt;-</span> <span class='no'>ifelse</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_else</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_if_else</span>(<span class='fl'>1</span>)
-<span class='no'>nestedifelse</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_cond</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_code</span>(<span class='st'>"&gt;"</span>)
-<span class='no'>nestedifelse</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_if</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_function</span>(<span class='st'>"cat"</span>)
-<span class='no'>nestedifelse</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_else</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_function</span>(<span class='st'>"str"</span>)
-
-<span class='co'># Example 2: while loop</span>
-<span class='kw'>while</span>(<span class='no'>x</span> <span class='kw'>&lt;</span> <span class='fl'>18</span>) {
- <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>x</span> + <span class='fl'>5</span>
- <span class='fu'>print</span>(<span class='no'>x</span>)
+# Example 2: while loop
+while(x < 18) {
+ x <- x + 5
+ print(x)
 }
 
-<span class='co'># SCT</span>
-<span class='no'>w</span> <span class='kw'>&lt;-</span> <span class='fu'>check_while</span>(<span class='fl'>1</span>)
-<span class='no'>w</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_cond</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_code</span>(<span class='fu'>c</span>(<span class='st'>"&lt; 18"</span>, <span class='st'>"18 &gt;"</span>))
-<span class='no'>w</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_body</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_code</span>(<span class='fu'>c</span>(<span class='st'>"x + 5"</span>, <span class='st'>"5 + x"</span>))
-<span class='no'>w</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_body</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_function</span>(<span class='st'>"print"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>test_arg</span>(<span class='st'>"x"</span>)
-
-<span class='co'># Example 3: for loop</span>
-<span class='kw'>for</span>(<span class='no'>i</span> <span class='kw'>in</span> <span class='fl'>1</span>:<span class='fl'>5</span>) {
- <span class='fu'>print</span>(<span class='st'>"hurray!"</span>)
+# SCT
+check_while(1) %>% {
+  check_cond(.) %>% check_code(c("< 18", "18 >"))
+  check_body(.) %>% {
+    check_code(., c("x + 5", "5 + x"))
+    check_function(., "print") %>% test_arg("x")
+  }
 }
 
-<span class='co'># SCT</span>
-<span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_for</span>(<span class='fl'>1</span>)
-<span class='no'>cond</span> <span class='kw'>&lt;-</span> <span class='no'>f</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_cond</span>()
-<span class='no'>cond</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_code</span>(<span class='st'>"in"</span>)
-<span class='no'>cond</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_code</span>(<span class='st'>"1"</span>)
-<span class='no'>cond</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_code</span>(<span class='st'>"5"</span>)
-<span class='no'>f</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_body</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_function</span>(<span class='st'>"print"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_arg</span>(<span class='st'>"x"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
-<span class='co'># }</span></pre>
+# Example 3: for loop
+for(i in 1:5) {
+ print("hurray!") 
+}
+
+# SCT
+ex() %>% check_for() %>% {
+  check_cond(.) %>% {
+    check_code(., "in")
+    check_code(., "1")
+    check_code(., "5")
+  }
+  check_body(.) %>% check_function("print") %>% check_arg("x") %>% check_equal()
+}
+# }
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

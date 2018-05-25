@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check whether the student defined a function correctly — test_fun_def • testwhat</title>
+<title>Check whether the student defined a function correctly — check_fun_def • testwhat</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -28,9 +28,13 @@
 
 
 
-<meta property="og:title" content="Check whether the student defined a function correctly — test_fun_def" />
+<meta property="og:title" content="Check whether the student defined a function correctly — check_fun_def" />
 
-<meta property="og:description" content="Check whether the student defined a function correctly" />
+<meta property="og:description" content="check_fun_def checks whether an object is defined in the student enviornment, and returns a state that can be piped to:
+check_arguments, to check whether the correct arguments where specified.
+check_call, to call the function with the provided arguments, and produces a state that can be piped to check_output, check_result and check_error to compare the output, result or error from calling the function between student and solution.
+check_body, that returns a state that focuses on the body that defines the function. Note that you cannot use check_object to compare variables that are limited to the function scope.
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,10 +103,22 @@
       <a href="../articles/combining-sets-of-scts.html">Combining sets of SCTs</a>
     </li>
     <li>
-      <a href="../articles/extensions.html">Extensions</a>
+      <a href="../articles/electives.html">Electives</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Advanced
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/test-to-check.html">Test to Check</a>
     </li>
     <li>
-      <a href="../articles/electives.html">Electives</a>
+      <a href="../articles/extensions.html">Extensions</a>
     </li>
   </ul>
 </li>
@@ -132,12 +148,16 @@
     <div class="page-header">
     <h1>Check whether the student defined a function correctly</h1>
     <small class="dont-index">Source: <a href='https://github.com/datacamp/testwhat/blob/master/R/check-fun-def.R'><code>R/check-fun-def.R</code></a></small>
-    <div class="hidden name"><code>test_fun_def.Rd</code></div>
+    <div class="hidden name"><code>check_fun_def.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Check whether the student defined a function correctly</p>
+    <p><code>check_fun_def</code> checks whether an object is defined in the student enviornment, and returns a state that can be piped to:</p><ul>
+<li><p><code>check_arguments</code>, to check whether the correct arguments where specified.</p></li>
+<li><p><code>check_call</code>, to call the function with the provided arguments, and produces a state that can be piped to <code>check_output</code>, <code>check_result</code> and <code>check_error</code> to compare the output, result or error from calling the function between student and solution.</p></li>
+<li><p><code>check_body</code>, that returns a state that focuses on the body that defines the function. Note that you cannot use <code>check_object</code> to compare variables that are limited to the function scope.</p></li>
+</ul>
     
     </div>
 
@@ -202,11 +222,15 @@ found.</p></td>
 }
 
 <span class='co'># SCT</span>
-<span class='no'>fundef</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_fun_def</span>(<span class='st'>"my_fun"</span>)
-<span class='no'>fundef</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_arguments</span>()
-<span class='no'>fundef</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_call</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_result</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
-<span class='no'>fundef</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_call</span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='st'>'c'</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>3</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_error</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
-<span class='no'>fundef</span> <span class='kw'>%&gt;%</span> <span class='fu'>check_body</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_code</span>(<span class='st'>"+"</span>)
+<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_fun_def</span>(<span class='st'>"my_fun"</span>) <span class='kw'>%&gt;%</span> {
+  <span class='fu'>check_arguments</span>(<span class='no'>.</span>)
+  <span class='fu'>check_call</span>(<span class='no'>.</span>, <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span> {
+    <span class='fu'>check_result</span>(<span class='no'>.</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
+    <span class='fu'>check_output</span>(<span class='no'>.</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
+  }
+  <span class='fu'>check_call</span>(<span class='no'>.</span>, <span class='kw'>a</span> <span class='kw'>=</span> <span class='st'>'c'</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>3</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_error</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_equal</span>()
+  <span class='fu'>check_body</span>(<span class='no'>.</span>) <span class='kw'>%&gt;%</span> <span class='fu'>check_code</span>(<span class='st'>"+"</span>)
+}
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
