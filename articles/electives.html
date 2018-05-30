@@ -125,9 +125,10 @@
 <div id="success-message" class="section level2">
 <h2 class="hasAnchor">
 <a href="#success-message" class="anchor"></a>Success message</h2>
-<p>When all tests in an SCT pass, <code>testwhat</code> will automatically generate a congratulatory message to present to the student. If you want to override this ‘success message’, you can use the <code>success_msg()</code> function:</p>
+<p>When all tests in an SCT pass, <code>testwhat</code> will automatically generate a congratulatory message to present to the student. If you want to override this ‘success message’, you can use the <code>success_msg()</code> function and specify a Markdown-formatted string:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">success_msg</span>(<span class="st">"Great job! You're getting goot at object assignment!"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">success_msg</span>(<span class="st">"Great job! You're getting _so_ goot at object assignment!"</span>)</a></code></pre></div>
+<p><a href="https://authoring.datacamp.com/courses/exercises/all-exercise-types/success-message.html">This article on the authoring docs</a> describes how to write good success messages.</p>
 </div>
 <div id="multiple-choice-exercises" class="section level2">
 <h2 class="hasAnchor">
