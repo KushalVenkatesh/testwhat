@@ -218,6 +218,7 @@
 <h3 class="hasAnchor">
 <a href="#test_correct" class="anchor"></a><code>test_correct()</code>
 </h3>
+<p>Still use <code>test_correct()</code> for now.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Solution (how x is calculated does not matter)</span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"></a>
@@ -225,7 +226,7 @@
 <a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw">test_correct</span>(<span class="kw">test_object</span>(<span class="st">"x"</span>), <span class="kw">test_function</span>(<span class="st">"mean"</span>, <span class="dt">args =</span> <span class="kw">c</span>(<span class="st">"x"</span>)))</a>
 <a class="sourceLine" id="cb9-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co"># new SCT</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="kw">check_correct</span>(</a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="kw">test_correct</span>(</a>
 <a class="sourceLine" id="cb9-9" data-line-number="9">  <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>(),</a>
 <a class="sourceLine" id="cb9-10" data-line-number="10">  <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_fun</span>(<span class="st">"mean"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_arg</span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
 <a class="sourceLine" id="cb9-11" data-line-number="11">)</a></code></pre></div>

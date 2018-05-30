@@ -122,10 +122,10 @@
 
     
     
-<p>In R, there are many ways to solve a problem. Writing an SCT that checks when students make a mistake, but is robust to multiple different solutions is a challenge. <code>check_correct</code> and <code>check_or</code> allow you to add logic to your SCT. Instead of running all tests and failing as soon as one of the tests fail, you can conditionally execute tests, and interpret the results separately.</p>
-<div id="example-1-check_correct" class="section level3">
+<p>In R, there are many ways to solve a problem. Writing an SCT that checks when students make a mistake, but is robust to multiple different solutions is a challenge. <code>test_correct</code> and <code>test_or</code> allow you to add logic to your SCT. Instead of running all tests and failing as soon as one of the tests fail, you can conditionally execute tests, and interpret the results separately.</p>
+<div id="example-1-test_correct" class="section level3">
 <h3 class="hasAnchor">
-<a href="#example-1-check_correct" class="anchor"></a>Example 1: <code>check_correct</code>
+<a href="#example-1-test_correct" class="anchor"></a>Example 1: <code>test_correct</code>
 </h3>
 <p>As an example, suppose you want the student to calculate the mean of a vector <code>vec</code> and store it in <code>res</code>. A possible solution could be:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># vec is predefined for you</span></a>
@@ -134,18 +134,18 @@
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># Calculate result</span></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5">result &lt;-<span class="st"> </span><span class="kw">mean</span>(vec)</a></code></pre></div>
 <p>You want the SCT to pass when the student manages to store the correct value in the object <code>result</code>. How <code>result</code> was calculated, does not matter to you: as long as <code>result</code> is correct, the SCT should accept the submission. If something <code>result</code> is not correct, you want to dig a little deeper and see if the student used the <code>mean()</code> function correctly. The following SCT will do just that:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">check_correct</span>(<span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"result"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>(),</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">              {</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">                <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_error</span>()</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">                <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"mean"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_arg</span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">              })</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">test_correct</span>(<span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"result"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>(),</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">             {</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">               <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_error</span>()</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">               <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"mean"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_arg</span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">             })</a></code></pre></div>
 <p>Notice that it’s perfectly possible to specify more than one SCT function call in the arguments as the second sub-SCT shows.</p>
 <p>Let’s go over what happens when the student submits different versions of the fifth line of code in the solution:</p>
 <ul>
 <li>The student submits <code>result &lt;- mean(vec)</code>, exactly the same as the solution.
 <ul>
 <li>
-<code>check_correct()</code> executes the first sub-SCT chain (<code>check_object()</code>)</li>
+<code>test_correct()</code> executes the first sub-SCT chain (<code>check_object()</code>)</li>
 <li>This SCT chain passes, so the second sub-SCT chain is not executed.</li>
 <li>The overall SCT passes.</li>
 </ul>
@@ -153,7 +153,7 @@
 <li>The student submits <code>result &lt;- sum(vec)/length(vec)</code>, which should be correct
 <ul>
 <li>
-<code>check_correct()</code> executes the first sub-SCT chain</li>
+<code>test_correct()</code> executes the first sub-SCT chain</li>
 <li>This SCT chain passes, so the second sub-SCT chain is not executed.</li>
 <li>The overall SCT passes, even though <code>mean()</code> was not used.</li>
 </ul>
@@ -161,8 +161,8 @@
 <li>The student submits <code>result &lt;- mean(vec + 1)</code>.
 <ul>
 <li>
-<code>check_correct()</code> executes the first sub-SCT chain.</li>
-<li>This sub-SCT chain fails <em>silently</em>, so <code>check_correct()</code> heads over to the second, ‘diagnose’ sub-SCT chain (<code>check_function()</code> etc)</li>
+<code>test_correct()</code> executes the first sub-SCT chain.</li>
+<li>This sub-SCT chain fails <em>silently</em>, so <code>test_correct()</code> heads over to the second, ‘diagnose’ sub-SCT chain (<code>check_function()</code> etc)</li>
 <li>
 <code>check_function()</code> will fail, because the parameter passed to <code>mean()</code> does not correspond to the argument passed in the solution.</li>
 <li>The overall SCT fails, with a meaningful, specific feedback message: you did not correctly specify the argument inside <code>mean()</code>.</li>
@@ -171,8 +171,8 @@
 <li>The student submits <code>result &lt;- mean(vec) + 1</code>.
 <ul>
 <li>
-<code>check_correct()</code> executes the first sub-SCT chain</li>
-<li>This sub-SCT chain fails <em>silently</em>, so <code>check_correct()</code> heads over to the second, ‘diagnose’ sub-SCT chain (<code>check_function()</code> etc)</li>
+<code>test_correct()</code> executes the first sub-SCT chain</li>
+<li>This sub-SCT chain fails <em>silently</em>, so <code>test_correct()</code> heads over to the second, ‘diagnose’ sub-SCT chain (<code>check_function()</code> etc)</li>
 <li>Both functions in the second sub-SCT chain pass, because <code>mean()</code> is called in exactly the same way in the student code as in the solution.</li>
 <li>Because there is clearly something wrong - <code>result</code> is not correct - the ‘check’ sub-SCT, <code>ex() %&gt;% test_object("result")</code> is executed again, but <em>loudly</em> this time.</li>
 <li>
@@ -181,29 +181,29 @@
 </li>
 </ul>
 </div>
-<div id="example-2-check_or" class="section level2">
+<div id="example-2-test_or" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example-2-check_or" class="anchor"></a>Example 2: <code>check_or</code>
+<a href="#example-2-test_or" class="anchor"></a>Example 2: <code>test_or</code>
 </h2>
 <p>This function simply tests whether one of the sub-SCTs you specify inside it passes. If such as a sub-SCT is a single function, you can simply pass the function call as is. If you want to include multiple functions in a sub-SCT, use curly brackets (see previous example).</p>
 <p>Suppose you want to check whether people correctly printed out any integer between 3 and 7. A solution could be:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">print</span>(<span class="dv">4</span>)</a></code></pre></div>
 <p>To test this, you can use <code>test_or</code> with three separate <code>check_output_expr()</code> functions.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">check_or</span>(<span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_output_expr</span>(<span class="st">'4'</span>),</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">         <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_output_expr</span>(<span class="st">'5'</span>),</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">         <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_output_expr</span>(<span class="st">'6'</span>))</a></code></pre></div>
-<p>If all of the SCTs that you pass fail, the feedback that the first sub-SCT generated is presented to the student. If you want to override the message that is shown if all sub-SCTs fail, you can manually specify <code>incorrect_msg</code> inside <code>check_or</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">check_or</span>(<span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_output_expr</span>(<span class="st">'4'</span>),</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">         <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_output_expr</span>(<span class="st">'5'</span>),</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">         <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_output_expr</span>(<span class="st">'6'</span>),</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">         <span class="dt">incorrect_msg =</span> <span class="st">"Just print out either 4, 5, or 6!"</span>)</a></code></pre></div>
-<p>You can consider <code>check_or()</code> a logic-inducing function. The different calls to <code>testwhat</code> functions that are in your SCT are actually all tests that <em>have</em> to pass: they are <code>AND</code> tests. With <code>test_or()</code> you can add chunks of <code>OR</code> tests in there.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">test_or</span>(<span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_output_expr</span>(<span class="st">'4'</span>),</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">        <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_output_expr</span>(<span class="st">'5'</span>),</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">        <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_output_expr</span>(<span class="st">'6'</span>))</a></code></pre></div>
+<p>If all of the SCTs that you pass fail, the feedback that the first sub-SCT generated is presented to the student. If you want to override the message that is shown if all sub-SCTs fail, you can manually specify <code>incorrect_msg</code> inside <code>test_or</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">test_or</span>(<span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_output_expr</span>(<span class="st">'4'</span>),</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">        <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_output_expr</span>(<span class="st">'5'</span>),</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">        <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_output_expr</span>(<span class="st">'6'</span>),</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">        <span class="dt">incorrect_msg =</span> <span class="st">"Just print out either 4, 5, or 6!"</span>)</a></code></pre></div>
+<p>You can consider <code>test_or()</code> a logic-inducing function. The different calls to <code>testwhat</code> functions that are in your SCT are actually all tests that <em>have</em> to pass: they are <code>AND</code> tests. With <code>test_or()</code> you can add chunks of <code>OR</code> tests in there.</p>
 </div>
 <div id="why-use-it" class="section level2">
 <h2 class="hasAnchor">
 <a href="#why-use-it" class="anchor"></a>Why use it?</h2>
-<p>You will find that <code>check_correct()</code> and <code>check_or()</code> are extremely powerful functions to allow for different ways of solving the same problem.</p>
-<p>For example, you can use <code>check_correct()</code> to check the end result of a calculation. If the end result is correct, you can go ahead and accept the entire exercise. If the end result is incorrect, you can use the <code>diagnose_code</code> part of <code>check_correct()</code> to dig a little deeper. It is also perfectly possible to use <code>check_correct()</code> inside another <code>check_correct()</code>, to make things more advanced.</p>
+<p>You will find that <code>test_correct()</code> and <code>test_or()</code> are extremely powerful functions to allow for different ways of solving the same problem.</p>
+<p>For example, you can use <code>test_correct()</code> to check the end result of a calculation. If the end result is correct, you can go ahead and accept the entire exercise. If the end result is incorrect, you can use the <code>diagnose_code</code> part of <code>test_correct()</code> to dig a little deeper. It is also perfectly possible to use <code>test_correct()</code> inside another <code>test_correct()</code>, to make things more advanced.</p>
 </div>
   </div>
 
@@ -212,7 +212,7 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#example-2-check_or">Example 2: <code>check_or</code></a></li>
+<li><a href="#example-2-test_or">Example 2: <code>test_or</code></a></li>
       <li><a href="#why-use-it">Why use it?</a></li>
       </ul>
 </div>

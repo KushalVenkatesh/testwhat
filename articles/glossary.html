@@ -159,11 +159,11 @@
 <a class="sourceLine" id="cb4-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># sct</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw">check_correct</span>(<span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>(),</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">              <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"mean"</span>) <span class="op">%&gt;%</span><span class="st"> </span>{</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">                <span class="kw">check_arg</span>(., <span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
-<a class="sourceLine" id="cb4-8" data-line-number="8">                <span class="kw">check_arg</span>(., <span class="st">"na.rm"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
-<a class="sourceLine" id="cb4-9" data-line-number="9">              })</a></code></pre></div>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw">test_correct</span>(<span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>(),</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">             <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"mean"</span>) <span class="op">%&gt;%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">               <span class="kw">check_arg</span>(., <span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">               <span class="kw">check_arg</span>(., <span class="st">"na.rm"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">             })</a></code></pre></div>
 </div>
 <div id="check-output" class="section level3">
 <h3 class="hasAnchor">
