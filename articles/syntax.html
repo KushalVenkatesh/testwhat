@@ -145,7 +145,7 @@ if (x &gt; 0) {
 `@sct`
 
 ```r
-if_state &lt;- ex() %&gt;% check_if_else() %&gt;% {
+ex() %&gt;% check_if_else() %&gt;% {
     check_cond(.) %&gt;% check_code(c("x\\s+&gt;\\s+0", "0\\s+&lt;\\s+x")) # chain A
     check_if(.) %&gt;% check_function("print") %&gt;% check_arg("x") %&gt;% check_equal() # chain B
 }

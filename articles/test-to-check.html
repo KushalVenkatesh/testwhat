@@ -186,7 +186,7 @@
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw">test_function</span>(<span class="st">"mean"</span>, <span class="dt">args =</span> <span class="kw">c</span>(<span class="st">"x"</span>, <span class="st">"na.rm"</span>), <span class="dt">eval =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">NA</span>))</a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co"># SCT</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8">funstate &lt;-<span class="st"> </span><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"mean"</span>) <span class="op">%&gt;%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"mean"</span>) <span class="op">%&gt;%</span><span class="st"> </span>{</a>
 <a class="sourceLine" id="cb6-9" data-line-number="9">  <span class="kw">check_arg</span>(., <span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
 <a class="sourceLine" id="cb6-10" data-line-number="10">  <span class="kw">check_arg</span>(., <span class="st">"na.rm"</span>)</a>
 <a class="sourceLine" id="cb6-11" data-line-number="11">}</a></code></pre></div>

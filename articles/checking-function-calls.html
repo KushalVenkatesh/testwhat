@@ -130,7 +130,7 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Round pi to three digits</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">round</span>(pi, <span class="dv">3</span>)</a></code></pre></div>
 <p>The following SCT tests whether the <code>round()</code> function is used correctly:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">fun &lt;-<span class="st"> </span><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"round"</span>) <span class="op">%&gt;%</span><span class="st"> </span>{</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"round"</span>) <span class="op">%&gt;%</span><span class="st"> </span>{</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">check_arg</span>(., <span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="kw">check_arg</span>(., <span class="st">"digits"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">}</a></code></pre></div>
@@ -148,13 +148,16 @@
 <h3 class="hasAnchor">
 <a href="#custom-messages" class="anchor"></a>Custom messages</h3>
 <p>In case of a failure, <code>testwhat</code> will automatically generate meaningful feedback that’s specific to what the student did wrong, but you can also override these messages:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">fun &lt;-<span class="st"> </span><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"round"</span>, <span class="dt">not_called_msg =</span> <span class="st">"Have you used `round()` to round `pi`?"</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">fun <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="kw">check_arg</span>(<span class="st">"x"</span>, <span class="dt">arg_not_specified_msg =</span> <span class="st">"Have you specified the number to round?"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">  </span><span class="kw">check_equal</span>(<span class="st">"Have you correctly specified that `round()` should round `pi`?"</span>)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">fun <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">  </span><span class="kw">check_arg</span>(<span class="st">"digits"</span>, <span class="dt">arg_not_specfied_msg =</span> <span class="st">"Have you specified to how many digits the number should be rounded?"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="st">  </span><span class="kw">check_equal</span>(<span class="st">"Have you correctly set the `digits` argument to 3?"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">ncm &lt;-<span class="st"> "Have you used `round()` to round `pi`?"</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">arg1ns &lt;-<span class="st"> "Have you specified the number to round?"</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">arg1inc &lt;-<span class="st"> "Have you correctly specified that `round()` should round `pi`?"</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">arg2ns &lt;-<span class="st"> "Have you specified to how many digits the number should be rounded?"</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">arg2inc &lt;-<span class="st"> "Have you correctly set the `digits` argument to 3?"</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"round"</span>, <span class="dt">not_called_msg =</span> ncm) <span class="op">%&gt;%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="kw">check_arg</span>(., <span class="st">"x"</span>, <span class="dt">arg_not_specified_msg =</span> arg1ns) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>(<span class="dt">incorrect_msg =</span> arg1inc)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">  <span class="kw">check_arg</span>(., <span class="st">"digits"</span>, <span class="dt">arg_not_specfied_msg =</span> arg2ns) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>(<span class="dt">incorrect_msg =</span> arg2inc)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">}</a></code></pre></div>
 </div>
 <div id="eval" class="section level3">
 <h3 class="hasAnchor">
@@ -166,9 +169,10 @@
 <li>If <code>eval = TRUE</code>, which is the default, the expressions that are used to set the arguments are evaluated and their results compared.</li>
 </ul>
 <p>If you change the SCT as follows (which in this example is not a good idea!):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">fun &lt;-<span class="st"> </span><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"round"</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">fun <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_arg</span>(<span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>(<span class="dt">eval =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">fun <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_arg</span>(<span class="st">"digits"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">"round"</span>) <span class="op">%&gt;%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="kw">check_arg</span>(., <span class="st">"x"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>(<span class="dt">eval =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="kw">check_arg</span>(., <span class="st">"digits"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">}</a></code></pre></div>
 <p>not all of the student submissions listed above would be accepted, because now <code>pi</code> is checked literally, as the string <code>"pi"</code>, not as the number <code>3.1415...</code>. Using <code>eval = FALSE</code> is interesting when you’re working with huge datasets and don’t want to compare their values exhaustively, or for objects for which the equality operator is not standard, such as SQL connections.</p>
 </div>
 </div>
@@ -299,17 +303,17 @@
 <p>However, if you simply use the following SCT</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">test_function</span>(<span class="st">"plot"</span>, <span class="dt">args =</span> <span class="kw">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>))</a></code></pre></div>
 <p>The third and fourth plot won’t work, because the solution code does not contain the calls to compare to. You can use the more granular <code>check_*()</code> functions in combination with <code>test_or()</code> and <code>override_solution()</code>. As the name suggests, this temporarily overrides the solution so that you can use <code>check_function()</code> for different possibilities.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">test_or</span>({</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">  fun &lt;-<span class="st"> </span><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">'plot'</span>)</a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">  fun <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_arg</span>(<span class="st">'x'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
-<a class="sourceLine" id="cb22-4" data-line-number="4">  fun <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_arg</span>(<span class="st">'y'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
-<a class="sourceLine" id="cb22-5" data-line-number="5">}, {</a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">  fun &lt;-<span class="st"> </span><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">override_solution</span>(<span class="st">'plot(res ~ time, data = df)'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">'plot'</span>)</a>
-<a class="sourceLine" id="cb22-7" data-line-number="7">  fun <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_arg</span>(<span class="st">'formula'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
-<a class="sourceLine" id="cb22-8" data-line-number="8">  fun <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_arg</span>(<span class="st">'data'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
-<a class="sourceLine" id="cb22-9" data-line-number="9">}, {</a>
-<a class="sourceLine" id="cb22-10" data-line-number="10">  <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">override_solution</span>(<span class="st">'plot(df$res ~ df$time)'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">'plot'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_arg</span>(<span class="st">'formula'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
-<a class="sourceLine" id="cb22-11" data-line-number="11">})</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">test_or</span>(<span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">'plot'</span>) <span class="op">%&gt;%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">          <span class="kw">check_arg</span>(., <span class="st">'x'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">          <span class="kw">check_arg</span>(., <span class="st">'y'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">        },</a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">        <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">override_solution</span>(<span class="st">'plot(res ~ time, data = df)'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">'plot'</span>) <span class="op">%&gt;%</span><span class="st"> </span>{</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6">          <span class="kw">check_arg</span>(., <span class="st">'formula'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
+<a class="sourceLine" id="cb22-7" data-line-number="7">          <span class="kw">check_arg</span>(., <span class="st">'data'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
+<a class="sourceLine" id="cb22-8" data-line-number="8">        },</a>
+<a class="sourceLine" id="cb22-9" data-line-number="9">        <span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">override_solution</span>(<span class="st">'plot(df$res ~ df$time)'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_function</span>(<span class="st">'plot'</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb22-10" data-line-number="10"><span class="st">          </span><span class="kw">check_arg</span>(<span class="st">'formula'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_equal</span>()</a>
+<a class="sourceLine" id="cb22-11" data-line-number="11">        )</a></code></pre></div>
 <div id="example-6-function-results" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-6-function-results" class="anchor"></a>Example 6: Function results</h3>
