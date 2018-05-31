@@ -145,8 +145,9 @@
 <a class="sourceLine" id="cb2-10" data-line-number="10"></a>
 <a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co"># Debugging state</span></a>
 <a class="sourceLine" id="cb2-12" data-line-number="12">s &lt;-<span class="st"> </span><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_object</span>()</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">s        <span class="co"># only prints out state class</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="kw">str</span>(s)   <span class="co"># full overview of state</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-13" data-line-number="13">s                     <span class="co"># only prints out state class</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="kw">str</span>(s)                <span class="co"># full overview of state</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">s<span class="op">$</span><span class="kw">get</span>(<span class="st">"student_code"</span>) <span class="co"># access student code in state</span></a></code></pre></div>
 <p>To include an SCT in a DataCamp course, visit <a href="https://authoring.datacamp.com" class="uri">https://authoring.datacamp.com</a>.</p>
 </div>
 <div id="tests" class="section level2">
