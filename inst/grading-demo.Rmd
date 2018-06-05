@@ -1,0 +1,36 @@
+---
+title: "Grading demo"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(testwhat)
+
+tutorial_options(exercise.timelimit = 60, exercise.checker = grade_testwhat)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Topic 1
+
+### Exercise 
+
+Let's make this exercise about variable assignment.
+
+```{r number, exercise = TRUE}
+# Create x, equal to 1
+```
+
+```{r number-solution}
+# Create x, equal to 1
+x <- 1
+```
+
+```{r number-check}
+# Type testwhat SCT functions here:
+ex() %>% check_object('x') %>% check_equal()
+```
+
+
