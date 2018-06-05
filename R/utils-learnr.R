@@ -1,15 +1,39 @@
+#' A checker function to use with learnr
+#'
+#' For exercise checking, learnr tutorials require a function that learnr can
+#' use in the background to run the code in each "-check" chunk and to format
+#' the results into a format that learnr can display. The function must accept a
+#' specific set of inputs and return a specific type of output. Users are not
+#' intended to use the function themselves, but to pass it to the
+#' \code{exercise.checker} knitr chunk option within the setup chunk of the
+#' tutorial.
+#'
+#' Similar to grader's \code{grade_learnr()}, testwhat provides
+#' \code{testwhat_learnr()} for this purpose. To enable exercise checking in
+#' your learnr tutorial, set \code{tutorial_options(exercise.checker =
+#' testwhat_learnr)} in the setup chunk of your tutorial.
+#'
+#' @param label Label for exercise chunk
+#' @param solution_code R code submitted by the user
+#' @param user_code 	Code provided within the "-solution" chunk for the
+#'   exercise.
+#' @param check_code 	Code provided within the "-check" chunk for the exercise.
+#' @param envir_result 	The R environment after the execution of the chunk.
+#' @param evaluate_result The return value from the \code{evaluate::evaluate}
+#'   function.
+#' @param ... Unused (include for compatibility with parameters to be added in
+#'   the future)
+#'
+#' @return An R list which contains several fields indicating the result of the
+#'   check.
 #' @export
-grade_testwhat <- function(label = NULL,
-                           solution_code = NULL,
-                           user_code = NULL,
-                           check_code = NULL,
-                           envir_result = NULL,
-                           evaluate_result = NULL,
-                           ...) {
-  
-  print(solution_code)
-  print(user_code)
-  print(check_code)
+testwhat_learnr <- function(label = NULL,
+                            solution_code = NULL,
+                            user_code = NULL,
+                            check_code = NULL,
+                            envir_result = NULL,
+                            evaluate_result = NULL,
+                            ...) {
   
   ######### START COPY FROM grade_learnr ##################
   # Sometimes no user code is provided, but
@@ -37,71 +61,15 @@ grade_testwhat <- function(label = NULL,
   }
   ######### END COPY FROM grade_learnr ##################
   
-  setup_state_v2(stu_code = user_code,
-                 stu_env = envir_result,
-                 stu_out = evaluate_result,
-                 sol_code = solution_code)
-  
-  if (is.null(check_code)) {
-    check_code <- ""
-  }
+  setup_state(sol_code = solution_code,
+              stu_code = user_code,
+              sol_env = NULL,
+              stu_env = envir_result,
+              stu_result = evaluate_result)
   
   res <- run_until_fail(parse(text = check_code))
-  
   return(list(message = res$message,
               correct = res$correct,
               location = "append",
               type = if(res$correct) "success" else "error"))
-}
-
-#' @export
-setup_state_v2 <- function(stu_code, stu_env, stu_out, sol_code) {
-  
-  # Parts of r-backend
-  convert <- function(item, ...) UseMethod("convert")
-  
-  convert.default <- function(item, ...) {
-    list(type = "output", payload = gsub("\n+$", "", item))
-  }
-  
-  convert.source <- function(item, ...) {
-    list(type = "code", payload = gsub("\n+$", "", item$src))  
-  }
-  
-  convert.message <- function(item, ...) {
-    list(type = "r-message", payload = gsub("\n+$", "", item$message))  
-  }
-  
-  convert.warning <- function(item, ...) {
-    list(type = "r-warning", payload = paste0("Warning message: ", item$message))
-  }
-  
-  convert.error <- function(item, ...) {
-    list(type = "r-error", payload = paste0("Error: ", item$message))  
-  }
-  
-  sol_env <- new.env(parent = globalenv())
-  evaluate::evaluate(sol_code, envir = sol_env, stop_on_error = 2)
-  
-  # reformat result of evaluate (passed by learnr)
-  formatted_output <- sapply(stu_out, function(x) list(convert(x)))
-  
-  tw$clear()
-  tw$set(success_msg = "Great work!")
-  
-  state <- RootState$new(
-    pec = "",
-    student_code = stu_code,
-    student_pd = build_pd(stu_code),
-    student_env = stu_env,
-    solution_code = sol_code,
-    solution_pd = build_pd(sol_code),
-    solution_env = sol_env,
-    output_list = formatted_output,
-    test_env = new.env(parent = environment())
-  )
-  
-  # testwhat will access the reporter and state from the tw object
-  tw$set(state = state, stack = TRUE, seed = 42)
-  return(invisible(tw$get("state")))
 }

@@ -1,3 +1,4 @@
+library(testwhat)
 stu_env <- new.env(parent = globalenv())
 evaluate_result <- evaluate::evaluate("x <- 2", envir = stu_env)
 grade_testwhat(label = "test",

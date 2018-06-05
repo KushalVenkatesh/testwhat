@@ -77,8 +77,7 @@ run_until_fail <- function(code) {
            })
 }
 
-#' @export
-post_process <- function(res, ex_type = "NormalExercise") {
+post_process <- function(res, ex_type) {
   # convert to HTML
   res$message <- to_html(res$message)
   
