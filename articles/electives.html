@@ -8,8 +8,8 @@
 <title>Electives • testwhat</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="Electives">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Electives">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -159,18 +159,36 @@ test_mc(correct = 3,
 ```</code></pre>
 <p>The first argument of <code>test_mc()</code>, <code>correct</code>, should be the number of the correct answer in this list. Here, the correct answer is Ross Ihaka, corresponding to 3. The <code>feedback_msgs</code> argument should be a list of strings with a length equal to the number of options. We encourage you to provide feedback messages that are informative and tailored to the (incorrect) option that people selected. Make sure to correctly order the feedback message such that it corresponds to the possible answers that are listed in the instructions tab. Notice that there’s no need for <code>success_msg()</code> in multiple choice exercises, as you have to specify the success message inside <code>test_mc()</code>, along with the feedback for incorrect options.</p>
 </div>
+<div id="checking-library-calls" class="section level2">
+<h2 class="hasAnchor">
+<a href="#checking-library-calls" class="anchor"></a>Checking library calls</h2>
+<p>The <code>check_library()</code> function can be used to verify whether a student correclty used <code>library()</code> or <code>require()</code> to load in a package. It’s a utility function that uses <code>check_code()</code> behind the scenes.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># solution</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co"># sct</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">ex</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">check_library</span>(<span class="st">"dplyr"</span>)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co"># submissions that pass</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="kw">library</span>(<span class="st">'dplyr'</span>)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="kw">library</span>(<span class="st">"dplyr"</span>)</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="kw">require</span>(dplyr)</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="kw">require</span>(<span class="st">'dplyr'</span>)</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="kw">require</span>(<span class="st">"dplyr"</span>)</a></code></pre></div>
+</div>
 <div id="randomness" class="section level2">
 <h2 class="hasAnchor">
 <a href="#randomness" class="anchor"></a>Randomness</h2>
 <p>To check the correctness of function calls, R objects etc. <code>testwhat</code> uses a student and solution environment. The pre exercise code (PEC) and student submission are executed in the student environment. Likewise, the PEC and the solution code are executed in the solution envrionment.</p>
 <p>For basic exercises that don’t involve a random componenent, this works fine. As soon as your R code depends on pseudo-random numbers, however, this could imply a mismatch between objects in the student and solution code. To solve this, the R backend specifies seeds itself. (see <code>?set.seed</code> for more background)</p>
 <p>Before running the PEC in the student environment, the backend specifies a random seed based on the current time in seconds (i.e. a random seed). Before running the PEC in the solution environment, the same seed is reset. That way, the PEC leads to the exact same student and solution environments, even when randomly generated numbers are used. As an example, the following PEC will lead to the same <code>my_samples</code> object in both student and solution environment.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">my_samples &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">my_samples &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a></code></pre></div>
 <p>If you want to work with your own seed in the PEC, simply use <code>set.seed()</code> at the top of your script, which overrides the seed the backend specified:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">my_samples &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">my_samples &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)</a></code></pre></div>
 <p>On exercise startup, the backend will run the solution code after running the PEC in the solution environment. Before the backend runs the solution code, however, a <em>script seed</em> will be specified with <code>set.seed()</code>. This random seed is again based on the current time. This same seed will be used to reset the seed before each submission of a student: that way, there will again be perfect correspondence between both environments. If you want to work with a custom script seed, you have two options. You can either place a <code>set.seed()</code> call at the top of both the sample and solution code and tell the student to not touch this. This is clearly non-ideal, so there’s a second option: the backend provides the function <code>custom_seed()</code>. Just like <code>set.seed()</code> it takes a number that is used as the seed. If you call this function in your pre exercise code, the backend will use this seed instead of its own randomly generated seed before executing the solution code in the solution environment and before executing the student submission in the student environment.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">custom_seed</span>(<span class="dv">1234</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">custom_seed</span>(<span class="dv">1234</span>)</a></code></pre></div>
 <p><strong>In general, using <code>set.seed()</code> and <code>custom_seed()</code> in your exercises is not necessary to ensure correspondence between your student and solution environment: the backend takes care of this for you. These functions are only necessary if you want to manually set a seed for either the pre exercise code or the student/solution code</strong></p>
 </div>
 <div id="allow-solution-error" class="section level2">
@@ -178,7 +196,7 @@ test_mc(correct = 3,
 <a href="#allow-solution-error" class="anchor"></a>Allow solution error</h2>
 <p>In some cases, you may want the student to submit code that intentially throws errors. For example, you want the student to define a function that throws an error if the input arguments are not in the correct format, and next you want the student to call this functoin, hence throwing the error.</p>
 <p>By default, DataCamp’s RBackend does not allow solutions that lead to an error. To suppress this backend error, you can use the following in the pre-exercise-code:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">allow_solution_error</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">allow_solution_error</span>()</a></code></pre></div>
 <p>This tells the backend that the solution code will generate an error when executed.</p>
 </div>
 <div id="blocking-solution-execution" class="section level2">
@@ -220,6 +238,7 @@ ex() %&gt;% override_solution(x = 5) %&gt;% check_object('x') %&gt;% check_equal
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#success-message">Success message</a></li>
       <li><a href="#multiple-choice-exercises">Multiple choice exercises</a></li>
+      <li><a href="#checking-library-calls">Checking library calls</a></li>
       <li><a href="#randomness">Randomness</a></li>
       <li><a href="#allow-solution-error">Allow solution error</a></li>
       <li><a href="#blocking-solution-execution">Blocking solution execution</a></li>

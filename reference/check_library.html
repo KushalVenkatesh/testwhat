@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check whether the library function was called correctly — test_library_function • testwhat</title>
+<title>Check whether the library function was called correctly — check_library • testwhat</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -21,19 +21,22 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
 
 
-<meta property="og:title" content="Check whether the library function was called correctly — test_library_function" />
+<meta property="og:title" content="Check whether the library function was called correctly — check_library" />
 
 <meta property="og:description" content="Convenience function to test in a very hacky way whether 
 the library function was called correctly in its most simple form.
 There is support for the different ways to call the library function" />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -145,8 +148,8 @@ There is support for the different ways to call the library function" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Check whether the library function was called correctly</h1>
-    <small class="dont-index">Source: <a href='https://github.com/datacamp/testwhat/blob/master/R/test-library-function.R'><code>R/test-library-function.R</code></a></small>
-    <div class="hidden name"><code>test_library_function.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/datacamp/testwhat/blob/master/R/check-library-function.R'><code>R/check-library-function.R</code></a></small>
+    <div class="hidden name"><code>check_library.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -157,11 +160,15 @@ There is support for the different ways to call the library function</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>test_library_function</span>(<span class='no'>package</span>, <span class='kw'>not_called_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>check_library</span>(<span class='no'>state</span>, <span class='no'>package</span>, <span class='kw'>not_called_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>incorrect_msg</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>state</th>
+      <td><p>state to start from</p></td>
+    </tr>
     <tr>
       <th>package</th>
       <td><p>package name for which the library()
@@ -182,13 +189,11 @@ function wasn't called for the specified package.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Example solution code</span>
+<span class='co'># example solution</span>
 <span class='fu'>library</span>(<span class='no'>ggvis</span>)
-<span class='fu'>library</span>(<span class='no'>dplyr</span>)
 
-<span class='co'># SCT to test both library calls:</span>
-<span class='fu'>test_library_function</span>(<span class='st'>"ggvis"</span>)
-<span class='fu'>test_library_function</span>(<span class='st'>"dplyr"</span>)
+<span class='co'># sct to test whether ggvis was loaded</span>
+<span class='fu'>ex</span>() <span class='kw'>%&gt;%</span> <span class='fu'>check_library</span>(<span class='st'>"ggvis"</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
